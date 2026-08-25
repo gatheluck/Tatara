@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "research-scope",
+  "displayName": "Research Scope",
+  "version": "0.1.0",
+  "description": "研究テーマを練り切るまでの工程。外部 Deep Research を入力に、独立した2経路の調査を突き合わせ、空白を壊しにいって、残ったものだけを主張にする。",
+  "author": {
+    "name": "Yoshihiro Fukuhara"
+  },
+  "license": "MIT",
+  "keywords": ["research", "survey", "novelty", "deep-research", "literature-review"]
+}
