@@ -48,15 +48,15 @@
 
 ## 進め方
 
-`research-scope` プラグインの Stage 0〜4 に従う。
+`tatara` プラグインの Stage 0〜4 に従う。
 
 ```
-0. /research-scope:dr-prompt   → deep-research-prompt.md
+0. /tatara:dr-prompt   → deep-research-prompt.md
    ✋ 外部 DR に貼る → Markdown DL → deep-research-output.md
-2. /research-scope:sweep       → cc-research/
-3. /research-scope:synthesize  → synthesis.md
-4. /research-scope:verify      → verify/
+2. /tatara:sweep       → cc-research/
+3. /tatara:synthesize  → synthesis.md
+4. /tatara:verify      → verify/
    ✋ 人間が判断
 ```
 
-技術的な争点が出たら `/research-scope:spike`。
+技術的な争点が出たら `/tatara:spike`。

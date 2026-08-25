@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # verify — 空白を壊しにいく
 
+> 🔨 **鉧を割る。** 叩いて、玉鋼と鉄滓に選り分ける。**壊れるのは工程であって失敗ではない。**
+
 まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。
 
 対象: $ARGUMENTS（省略時は尋ねる）。`synthesis.md` と `synthesis/S4-*.md` を読む。
@@ -66,7 +68,7 @@ S4 が挙げたもの。特に:
 | 数値 | 再実行して再生成する |
 | 矛盾 | 一次情報で確定させる |
 
-**技術的な争点が残っているなら `/research-scope:spike`。議論では決着しない。**
+**技術的な争点が残っているなら `/tatara:spike`。議論では決着しない。**
 
 ## 各エージェントに課すこと
 

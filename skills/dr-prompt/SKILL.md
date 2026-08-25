@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # dr-prompt — 外部 Deep Research 用プロンプトの生成
 
+> ⛏️ **砂鉄を採りにいく（外部経路）。** 外の Deep Research に何を掘らせるかを決める工程。
+
 まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。
 
 対象プロジェクト: $ARGUMENTS（省略時は直近のもの、または尋ねる）
@@ -83,4 +85,4 @@ disable-model-invocation: true
 ## 終わったら
 
 **Stage 2 は Deep Research の完了を待たずに並行して開始できる。**
-次は `/research-scope:sweep`。
+次は `/tatara:sweep`。

@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # synthesize — 突き合わせ
 
+> 🔥 **炉に入れる。** 2 経路の砂鉄を突き合わせ、現在地の表と被覆行列にする。
+
 まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。
 
 対象: $ARGUMENTS（省略時は尋ねる）。
@@ -69,4 +71,4 @@ DR が使った用語（レポート冒頭にあるはず）と、こちらが�
 
 ## 終わったら
 
-`/research-scope:verify`。**空白を壊しにいく。**
+`/tatara:verify`。**空白を壊しにいく。**

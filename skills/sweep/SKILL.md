@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # sweep — こちら側の独立調査
 
+> ⛏️ **砂鉄を採りにいく（こちらの経路）。** 別の場所を、別の掘り方で。比重の違うものが採れる。
+
 まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。
 
 対象: $ARGUMENTS（省略時は尋ねる）。その `context.md` を読む。
@@ -78,4 +80,4 @@ disable-model-invocation: true
 
 ## 終わったら
 
-外部 Deep Research の結果が揃っていれば `/research-scope:synthesize`。
+外部 Deep Research の結果が揃っていれば `/tatara:synthesize`。

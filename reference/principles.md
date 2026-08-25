@@ -1,6 +1,8 @@
-# principles — 全 skill が従う原則
+# 🔥 principles — 全 skill が従う原則
 
-**この 11 条は実証研究と実運用の実測に基づく。** 根拠は `evidence.md`。
+> **Tatara 鑪** の中心。skill は薄い。**この 11 条が本体。**
+
+**実証研究と実運用の実測に基づく。** 根拠は [`evidence.md`](evidence.md)。
 守れないなら、なぜ守れないかを成果物に書くこと。
 
 ---

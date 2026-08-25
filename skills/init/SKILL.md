@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # init — 調査プロジェクトの作成
 
+> 🌱 **炉を築く。** 何を精錬するのかを決め、記録の場所を用意する工程。
+
 まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。以降すべての工程がこれに従う。
 
 ## やること
@@ -63,4 +65,4 @@ Stage 2 のローカル調査がそれらを漁る。外部調査には原理的
 
 ## 終わったら
 
-次は `/research-scope:dr-prompt` と伝える。
+次は `/tatara:dr-prompt` と伝える。

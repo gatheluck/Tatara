@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # spike — 実行で決着させる
 
+> ⚡ **火を見る。** 議論では決まらないものを、実際に焚いて確かめる。
+
 まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。
 
 争点: $ARGUMENTS
