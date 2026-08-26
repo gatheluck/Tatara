@@ -228,11 +228,35 @@ don't contaminate the tool.
     └── 2026-10-02-sparse-moe-routing/
 ```
 
-**Point it wherever you like.** Set it once, at plugin-enable time:
+**Point it wherever you like.** `init` resolves the location in this order and stops at the first
+one that yields a path:
 
-| Setting | Meaning |
-|---|---|
-| **Tamahagane (玉鋼) repository** | Where artifacts accumulate. Leave empty to use `tamahagane/` in the current repository |
+| # | Source | Notes |
+|---|---|---|
+| 1 | `${user_config.tamahagane_path}` | Prompted at plugin-enable time. **Only works for an installed plugin** — see the warning |
+| 2 | `~/.claude/tatara.json` → `tamahagane_path` | **The one that always works.** Recommended |
+| 3 | `.tatara.json` in the current repository | Per-workspace override |
+| 4 | Ask, then offer to save the answer to `~/.claude/tatara.json` | So it is only asked once |
+
+```json
+{
+  "tamahagane_path": "/absolute/path/to/tamahagane"
+}
+```
+
+> ⚠️ **`${user_config.*}` does not work with `--plugin-dir`.**
+> That flag loads the plugin for a single session without installing it, so there is no plugin ID
+> and the config has nowhere to live. Skills still load fine; only the substitution is absent.
+> **Use `~/.claude/tatara.json` instead.**
+>
+> Related trap: `pluginConfigs` is read only from managed settings, `--settings`, and **user**
+> settings. Anything written to a project's `.claude/settings.json` is **silently ignored** — a
+> deliberate guard against repository-borne injection. `enabledPlugins` *is* honored at project
+> scope, so the asymmetry is easy to trip over.
+
+> 🧷 **`tamahagane_path` deliberately has no `default` in `plugin.json`.**
+> A default would make source 1 always return a value, which would shadow sources 2–4 and break
+> the chain. Leave it undeclared.
 
 The name comes from what a tatara run actually produces. If you point it at a repository that
 already uses a `projects/` subdirectory, that convention is followed instead.

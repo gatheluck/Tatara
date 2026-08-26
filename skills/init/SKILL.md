@@ -19,11 +19,29 @@ Create a research project for the topic "$ARGUMENTS".
 ### 1. Resolve the tamahagane (玉鋼) directory
 
 Everything this tool produces lands in one place — the **tamahagane** directory, named for what
-comes out of a tatara run. Resolve it in this order:
+comes out of a tatara run. Resolve it in this order, **stopping at the first one that yields a path**:
 
-1. **`${user_config.tamahagane_path}`** — set at plugin-enable time. Use it if it is non-empty
-2. Otherwise, **`tamahagane/` in the current working repository**
-3. If neither is workable, **ask the user**
+| # | Source | How to check |
+|---|---|---|
+| 1 | **`${user_config.tamahagane_path}`** | If this line still shows the literal `${...}` text, substitution is not active — fall through |
+| 2 | **`~/.claude/tatara.json`** → key `tamahagane_path` | `Read` it. Missing file is fine, fall through |
+| 3 | **`.tatara.json` in the current repository** → key `tamahagane_path` | Per-workspace override. Fall through if absent |
+| 4 | **Ask the user**, then **offer to write the answer to `~/.claude/tatara.json`** so it is only asked once |
+
+> ⚠️ **`${user_config.*}` only resolves for a properly installed plugin.**
+> A plugin loaded with `--plugin-dir` has no plugin ID, so its `userConfig` has nowhere to live and
+> the placeholder will not be substituted. **This is expected — use source 2 or 3.**
+>
+> Note also that `pluginConfigs` is read only from managed settings, `--settings`, and **user**
+> settings. Values written to a project's `.claude/settings.json` are **silently ignored**.
+
+The config file is plain JSON:
+
+```json
+{
+  "tamahagane_path": "/absolute/path/to/tamahagane"
+}
+```
 
 > ⚠️ **Never create it inside this plugin's repository.**
 > Keep the tool and the artifacts apart. Artifacts routinely contain confidential material (🔒),
