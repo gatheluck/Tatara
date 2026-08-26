@@ -2,11 +2,18 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "tatara",
   "displayName": "Tatara 鑪",
-  "version": "0.1.0",
-  "description": "研究テーマを練り切るまでの工程。散らばった文献という砂鉄から、現在地と空白を精錬して取り出す。外部 Deep Research を入力に、独立2経路の調査を突き合わせ、空白を壊しにいって、残ったものだけを主張にする。",
+  "version": "0.2.0",
+  "description": "Smelt the scattered literature down to two things: where the field actually stands, and where nobody has been. Feed it external Deep Research, cross-check two independent sweeps, then go break your own gap claim and keep only what survives.",
   "author": {
     "name": "Yoshihiro Fukuhara"
   },
   "license": "MIT",
-  "keywords": ["research", "survey", "novelty", "deep-research", "literature-review", "scoping"]
+  "keywords": ["research", "survey", "novelty", "deep-research", "literature-review", "scoping"],
+  "userConfig": {
+    "tamahagane_path": {
+      "type": "directory",
+      "title": "Tamahagane (玉鋼) repository",
+      "description": "Where research artifacts accumulate. Point this at a separate, private repository — artifacts routinely contain confidential material. Leave empty to use ./tamahagane inside the current repository."
+    }
+  }
 }

@@ -153,7 +153,7 @@ Start Claude Code **in your research repository** (where the output lives — se
 /tatara:init differentiable solvers for fluid simulation
 ```
 
-Creates `projects/2026-08-25-differentiable-fluid-solvers/` and a `context.md`.
+Creates `tamahagane/2026-08-25-differentiable-fluid-solvers/` and a `context.md`.
 It will ask about anything load-bearing that's missing.
 
 ### 2️⃣ Gather iron sand (external Deep Research)
@@ -210,7 +210,7 @@ Takes a technical dispute and settles it with the smallest program that decides 
 **This repo holds the tool only.** Research artifacts are created **in whichever repository you
 started Claude Code in.**
 
-As a guard, this repo's `.gitignore` excludes `projects/`. If you slip and work here, the artifacts
+As a guard, this repo's `.gitignore` excludes `tamahagane/` and `projects/`. If you slip and work here, the artifacts
 don't contaminate the tool.
 
 ### 🗂️ Expected layout
@@ -222,22 +222,27 @@ don't contaminate the tool.
 │   ├── reference/
 │   └── templates/
 │
-└── your-research-repo/          📚 the artifacts (may contain confidential material)
-    └── projects/
-        ├── 2026-08-25-differentiable-fluid-solvers/
-        ├── 2026-09-10-long-context-retrieval-eval/
-        └── 2026-10-02-sparse-moe-routing/
+└── tamahagane/                  📚 the artifacts (keep this one private)
+    ├── 2026-08-25-differentiable-fluid-solvers/
+    ├── 2026-09-10-long-context-retrieval-eval/
+    └── 2026-10-02-sparse-moe-routing/
 ```
 
-**Your research repo can be one you already have.** If `projects/` exists, topics land there; if
-not, it gets created. Existing naming conventions are followed.
+**Point it wherever you like.** Set it once, at plugin-enable time:
+
+| Setting | Meaning |
+|---|---|
+| **Tamahagane (玉鋼) repository** | Where artifacts accumulate. Leave empty to use `tamahagane/` in the current repository |
+
+The name comes from what a tatara run actually produces. If you point it at a repository that
+already uses a `projects/` subdirectory, that convention is followed instead.
 
 ### 📁 Inside one project
 
 Each project is **self-contained**.
 
 ```
-projects/YYYY-MM-DD-{slug}/
+tamahagane/YYYY-MM-DD-{slug}/
 ├── context.md                  problem, focus, open questions
 ├── deep-research-prompt.md     Stage 0. Never edited after sending (reproducibility record)
 ├── deep-research-output.md     Stage 1. Saved verbatim
@@ -256,7 +261,7 @@ projects/YYYY-MM-DD-{slug}/
 
 ### 🔗 Why keep all projects in one place
 
-**Topics stored under `projects/` can be read by later topics.**
+**Topics stored in the same tamahagane directory can be read by later topics.**
 
 Stage 2 includes an agent whose job is mining local context — it **goes through the other projects
 in the same repository**. External Deep Research cannot do this in principle, and it **gets more
