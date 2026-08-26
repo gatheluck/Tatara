@@ -117,26 +117,46 @@ support **moves from your own judgment to someone else's words**.
 
 ## 📦 Install
 
-### 🧪 Try it
+Anything under `~/.claude/skills/` loads automatically from the next session.
+After it starts, open `/help` → **Custom commands**. Six entries under `tatara:` means you're set 🎉
+
+### 🏠 Just use it
+
+```bash
+git clone https://github.com/gatheluck/Tatara.git ~/.claude/skills/tatara
+```
+
+### 🔗 Use it and hack on it — symlink
+
+If you also want to edit the plugin, **symlink your working copy instead of cloning twice.**
+
+```bash
+ln -s /path/to/your/tatara ~/.claude/skills/tatara
+```
+
+**Verified working**: the loader follows the symlink, and all six skills appear. One checkout, one
+place to `git pull`, edits live immediately. Run `/reload-plugins` to pick them up without
+restarting.
+
+> ⚠️ The flip side: a broken commit in your working copy breaks your tooling the moment you save.
+> And if the target moves, the plugin silently disappears.
+
+### 🧪 One-off test — `--plugin-dir`
 
 ```bash
 claude --plugin-dir /path/to/tatara
 ```
 
-After it starts, open `/help` → **Custom commands**. Six entries under `tatara:` means you're set 🎉
+Loads for a single session without installing.
 
-### 🏠 Keep it
+> ⚠️ **`userConfig` does not work this way.** No install means no plugin ID, so
+> `${user_config.*}` never resolves. Skills load fine. Use `~/.claude/tatara.json` for the
+> tamahagane path — see [Where the output accumulates](#-where-the-output-accumulates).
 
-Drop it under `~/.claude/skills/` and it loads automatically from the next session.
+### 👥 For a team
 
-```bash
-git clone <this-repo> ~/.claude/skills/tatara
-```
-
-For a team, distribute through a
+Distribute through a
 [plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces).
-
-Run `/reload-plugins` after editing.
 
 > 🌏 **Language.** The skills are written in English, but they instruct agents to write in
 > **your** language. Talk to Claude in Japanese and the artifacts come out in Japanese.
