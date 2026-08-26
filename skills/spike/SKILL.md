@@ -1,88 +1,94 @@
 ---
-description: 技術的な争点を、議論ではなく実行で決着させる。最小のコードを書いて叩き、結果をファイルに残す。
-argument-hint: <決着させたい争点>
+description: Settle a technical dispute by executing rather than arguing. Write the smallest code that decides it, hit it, and leave the result in a file.
+argument-hint: <the dispute to settle>
 disable-model-invocation: true
 ---
 
-# spike — 実行で決着させる
+# spike — settle it by running it
 
-> ⚡ **火を見る。** 議論では決まらないものを、実際に焚いて確かめる。
+> ⚡ **Read the flame.** What discussion won't decide, fire it and find out.
 
-まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。
+Read `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` first.
 
-争点: $ARGUMENTS
+Dispute: $ARGUMENTS
 
-## いつ使うか
+**Write in the user's language.**
 
-**議論で割れていて、かつ実行すれば分かるとき。**
+## When to use this
 
-典型的な状況:
-- 複数の情報源が食い違っていて、片方が推論・片方が一次資料
-- 「原理的にできない」対「捨てているだけ」のような対立
-- ある API / ライブラリで**何が実際に取れるか**が前提になっている
+**When the argument is split, and running it would tell you.**
 
-実測は意見に勝つ。**推論が多数派でも、一次資料 1 件のほうが強いことがある。**
+Typical situations:
+- Sources conflict, and one side is inference while the other is a primary source
+- "Impossible in principle" versus "just being thrown away"
+- **What you can actually get out of** some API or library is the premise of the argument
 
-## 手順
+Measurement beats opinion. **One primary source can outweigh a majority holding an inference.**
 
-### 1. 争点を 1 点に絞る
+## Procedure
 
-**絞れないなら、まだ spike の段階ではない。**
+### 1. Narrow the dispute to a single point
 
-「難しいか」ではなく「**X を Y から取得できるか**」の形にする。
-関係者が既に合意している部分（例: 多対 1 であること）は争点から外す。
+**If you can't narrow it, you aren't at the spike stage yet.**
 
-絞った争点と、各立場の**根拠の性質**（一次資料 / 実測 / 推論）を先に書く。
+Not "is this hard," but "**can X be obtained from Y**."
+Drop whatever the parties already agree on (that it's many-to-one, say) out of the dispute.
 
-### 2. 最小の再現物を作る
+Write the narrowed dispute down first, along with the **nature of the evidence** on each side
+(primary source / measurement / inference).
 
-- 環境は**隔離する**（conda env / venv / 一時ディレクトリ）。削除で元に戻せる形に
-- 依存のインストールが必要なら、**サイズを見積もってユーザーに確認する**
-- 試験対象は**最小**にする。ただし**争点を実際に踏む**もの
-  （例: シルエットを検査したいなら、平面だけの形状では不十分。曲面を入れる）
+### 2. Build the smallest reproduction
 
-### 3. API を introspect する
+- **Isolate the environment** (conda env / venv / a temp directory). It has to be undoable by deletion
+- If dependencies need installing, **estimate the size and check with the user**
+- Keep the test subject **minimal** — but it has to **actually touch the dispute**
+  (if the dispute is about the hard case, a test input that only covers the easy case proves nothing)
 
-前提を置かず、**実際に何が公開されているか**を列挙させる。
-ドキュメントとバイナリが食い違うことがある。**ローカルの `--help` / `dir()` を正とする。**
+### 3. Introspect the API
 
-### 4. 叩く
+Assume nothing. Have it enumerate **what is actually exposed**.
+Documentation and binary do diverge. **The local `--help` / `dir()` is the authority.**
 
-複数の経路を試す。1 つ通っても**他を飛ばさない**（早期 `break` で見落とす）。
+### 4. Hit it
 
-### 5. 自分の測定を疑う
+Try several routes. **Never skip the rest because one went through** (an early `break` makes you
+miss things).
 
-**spike の最大の失敗は、測定自体が間違っていること。**
+### 5. Distrust your own measurement
 
-実例:
-- 距離ゼロで照合 → **接触している隣接要素も距離ゼロになる**。一致の定義が甘かった
-- 要素の重複列挙 → 候補が必ず 2 つ組で出た
-- メソッド名の思い込み（`Extent()` と `Size()`）→「取得できなかった」と誤表示
-- 引数の数を間違えて `TypeError` → 「その API は無い」と誤判定
+**The biggest failure of a spike is the measurement itself being wrong.**
 
-**結果が不自然なら、まず自分のコードを疑う。**
-「都合のよい結果」が出たときほど疑う。
+Real cases:
+- Matching at distance zero → **adjacent elements that merely touch also come out at distance
+  zero.** The definition of a match was too loose
+- Duplicate enumeration of elements → candidates always came out in pairs
+- Assuming a method name (`Extent()` vs `Size()`) → wrongly displayed as "couldn't retrieve it"
+- Wrong number of arguments, so `TypeError` → misjudged as "that API doesn't exist"
 
-### 6. 記録する
+**If a result looks off, suspect your own code first.**
+Suspect it hardest when the result came out convenient.
 
-`verify/` に結果を書く。**スクリプトは全版残す**（誤りの経緯が読めるように）。
+### 6. Record it
 
-必ず書くこと:
+Write the result under `verify/`. **Keep every version of the script** (so the trail of the errors
+stays readable).
 
-- **争点と、各立場の根拠の性質**
-- **実測値**（数字で。「動いた」ではなく何件中何件か）
-- **判定** — どちらが正しかったか。**両方が部分的に正しいこともある**
-- **この spike の限界** — 試験形状は 1 つか、条件は 1 通りか、何を試していないか
-- **自分が犯した誤り** — 何をどう間違え、どう発覚したか
+Always write:
 
-## 過大に読まないための注意
+- **The dispute, and the nature of the evidence on each side**
+- **The measured values** (as numbers. Not "it worked," but how many out of how many)
+- **The verdict** — which side was right. **Both can be partly right**
+- **The limits of this spike** — one test shape? one set of conditions? what wasn't tried?
+- **The errors you made** — what you got wrong, how, and how it came to light
 
-- **1 条件の実測を一般化しない。** 何を試していないかを明記する
-- **その分野の古い文献を読む**（原則 3）。
-  自分が「発見」したことが数十年前に書かれていることがある。
-  spike の寄与は「**現在の道具でそれがどう露出しているか**」に限られることが多い
+## Guarding against over-reading
 
-## 終わったら
+- **Never generalize from a measurement taken under one condition.** State what you didn't try
+- **Read the old literature in that field** (Principle 3).
+  What you "discovered" may have been written down decades ago.
+  A spike's contribution is usually limited to "**how it is exposed in today's tools**"
 
-`synthesis.md` の該当する矛盾を「決着」に移す。
-決着しなかった部分は**未決に残す**。曖昧にしない。
+## When you're done
+
+Move the corresponding contradiction in `synthesis.md` to "settled."
+**Leave whatever didn't get settled under open.** Never blur it.

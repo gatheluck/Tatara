@@ -1,123 +1,139 @@
-# 🔥 principles — 全 skill が従う原則
+# 🔥 principles — what every skill follows
 
-> **Tatara 鑪** の中心。skill は薄い。**この 11 条が本体。**
+> The core of **Tatara (鑪)**. The skills are thin. **These eleven are the substance.**
 
-**実証研究と実運用の実測に基づく。** 根拠は [`evidence.md`](evidence.md)。
-守れないなら、なぜ守れないかを成果物に書くこと。
-
----
-
-## 1. 新規性をモデルに聞かない
-
-**「これは新規か？」と聞いてはいけない。**
-代わりに「**最も近い既存研究は何で、どこがどう違うか**」を出させる。
-
-- 「新規である」→ 不在の証明。検証不能
-- 「最も近いのは X で、差分は Y」→ **検証可能**。X を読めば確かめられる
-
-出力が判断ではなく**出典**になる。
-
-## 2. 空白は必ず探索範囲とセットで書く
-
-不在の主張は範囲を切って初めて意味を持つ。次が無いものは空白として採用しない。
-
-| 記録項目 | 例 |
-|---|---|
-| 何を探したか | **検索クエリの実文字列** |
-| どこを探したか | DB 名（arXiv / OpenAlex / 特許 / J-STAGE …） |
-| いつ時点か | 取得日 |
-| 最も近かったもの | 論文名と、なぜ「近いが違う」のか |
-
-書き方は「誰もやっていない」ではなく
-「**A・B・C を YYYY-MM-DD 時点で探した範囲では見つからなかった。最も近いのは X**」。
-
-## 3. 抄録から構造的な主張を組み立てない
-
-**最も高くつく誤りがこれ。**
-
-- 抄録から拾ったものは「**抄録にこう書いてある**」までしか主張しない
-- **対立・系譜・空白といった構造的な主張は、本文を読むまで作らない**
-- 抄録の一語を著者の立場として扱わない。**本文では別の語のことがある**
-- 自分の実測を「新規」と判断する前に、**その分野の古い文献を読む**
-
-## 4. LLM に品質を判定させない
-
-採否のゲートに使わない。使えるのは**照合可能なもの**だけ。
-
-- 引用が実在するか（逐語照合）
-- コードが走るか
-- 数値が再現するか
-
-## 5. 検証手段を生成側の外に置く
-
-「検証した」と言えるのは、**検証手段が生成側の外にあるとき**だけ。
-システム自身の検証ループの中に、人工物は隠れる。
-
-## 6. 2 経路を独立に走らせ、片方の結論を確定として扱わない
-
-外部 Deep Research と手元のエージェント調査を**互いに見せずに**走らせる。
-**突き合わせるまで、どちらの結論も確定ではない。**
-
-食い違いが最も情報量が多い。4 分類する。
-
-| 分類 | 意味 |
-|---|---|
-| 合意 | 両者が同じことを言う。信頼度が高い |
-| **矛盾** | 食い違う。**要検証。最も情報量が多い** |
-| 片方のみ | アクセスの非対称性の産物かもしれない |
-| **空白** | どちらも答えていない |
-
-## 7. 語彙より経路を変える
-
-**凝った言い換えは効かない。** 平凡な語で**別のデータベース**を叩くほうが当たる。
-発見メカニズムそのものを変える（引用グラフ / コード / データセット逆引き / 特許 / 非英語）。
-
-## 8. 数値は必ず「素性」とセットで書く
-
-**合成データの値と実データの値を混ぜない。** 表には素性の列を作る。
-素性が分からなければ「**素性不明**」と書く。
-
-## 9. excitement を選定基準にしない
-
-着想時の「面白そう」は、実行後の評価と**負の相関**を持つ。
-選抜には `cost-to-test`（最安の検証手順）を使う。**発想時ではなく選抜時に課す。**
-
-## 10. 歩留まりは 1 割前後を前提に数を決める
-
-実測値: アイデアの有望率 ~10%、初回実装成功 ~7%、40 案中の改善 5〜6 案、
-実験の 42% がコーディングエラーで失敗。
-
-**3 案しか立てないなら通るのは 0 か 1。**
-
-## 11. 空白が壊れるのは成功である
-
-空白の主張は書き換わってよい。**壊れるたびに主張が具体的になり、
-根拠が自分の判断から他人の引用に移る。**
-
-壊れなかった空白より、**何度か壊れて残った空白のほうが強い。**
+**Grounded in empirical research and measured operation.** Citations in [`evidence.md`](evidence.md).
+If you can't follow one, write down why in the artifact.
 
 ---
 
-## 運用上の制約（実測）
+## 1. Never ask a model whether something is novel
 
-- **長文の一括書き出しで接続が切れる。** 各エージェントに
-  「Write で骨子 → Edit で節ごとに追記、1 回 100〜200 行以内」を課す
-- 落ちたら **transcript を保持したまま再開**させる。**再調査させない**（コストが二重になる）
-- **サブエージェントは親の会話も既読ファイルも見ない。** ブリーフを自己完結させる
-- **compact 後、5,000 トークン超のファイルは本文が戻らない**（パス参照になる）。
-  長い入力は節ごとに分けてサブエージェントへ渡す
-- **WebSearch は 1 エージェント 200 回で尽きる。** 難物は対象を絞って複数体に分ける
-- **検索計画は取得可能性を先に検査する。** 代表 1 件を実際に叩いてから本番に入る
+**Do not ask "is this novel?"**
+Ask instead: **"What is the closest existing work, and exactly how does it differ?"**
 
-## 一次情報を取りにいく手引き（実証済み）
+- "This is novel" → a claim of absence. Unverifiable
+- "The closest is X, and the difference is Y" → **verifiable**. Read X and check
 
-| 手 | 効く場面 |
+The output becomes a **citation** rather than a judgment.
+
+## 2. Every gap claim carries its search scope
+
+A claim of absence only means something once its boundary is drawn. If the following are missing,
+the gap doesn't count.
+
+| Record | Example |
 |---|---|
-| **Google Books のスニペット検索** | Springer LNCS/CCIS。**頁番号つきで本文が逐語**で返る |
-| **WAF cookie を先に取ってから PDF 直リンク** | 「空の JS シェル」に見えるサイト |
-| **公的助成プロジェクトのサイト** | 成果公開義務がある。**現地語で検索** |
-| 共著企業の広報 | 企業が英語全文を無償公開していることがある |
-| 機関リポジトリのスキャン | テキスト層が無くても**画像化して判読**できる |
-| 被引用論文による紹介 | 本体が取れないとき。**必ず「又聞き」と明記** |
+| What you searched for | **the literal query strings** |
+| Where you searched | database names (arXiv / OpenAlex / patents / J-STAGE / …) |
+| As of when | retrieval date |
+| The nearest hit | the paper, and why it is "close but different" |
 
-**PDF は直接 Read しない。** `curl -sI` でサイズを確認してから判断する。
+Write it as: **"Not found across A, B, and C as of YYYY-MM-DD. The closest is X."**
+Never "nobody has done this."
+
+## 3. Never build a structural claim out of abstracts
+
+**This is the most expensive mistake available.**
+
+- Anything taken from an abstract is only "the abstract says X" — claim no more than that
+- **Structural claims — disputes, lineages, gaps — wait until you have read the full text**
+- A single word in an abstract is not the author's position. **The body often uses a different word**
+- Before judging your own measurement "novel," **read the old literature in that field**
+
+## 4. Never let an LLM judge quality
+
+Do not use it as an accept/reject gate. Only things that can be **checked**:
+
+- does the citation exist (verbatim comparison)
+- does the code run
+- do the numbers reproduce
+
+## 5. Keep the verifier outside the generator
+
+You can only say "verified" when **the means of verification sits outside the thing that generated
+the claim**. Artifacts hide inside a system's own verification loop.
+
+## 6. Run two routes independently; neither one's conclusion is final alone
+
+Run external Deep Research and your own agent sweep **without letting either see the other.**
+**Until they are cross-checked, neither conclusion is settled.**
+
+Disagreement carries the most information. Sort into four buckets:
+
+| Bucket | Meaning |
+|---|---|
+| Agreement | both say the same thing. Higher confidence |
+| **Contradiction** | they conflict. **Needs resolution. Most informative** |
+| One side only | may be an artifact of asymmetric access |
+| **Gap** | neither answers it |
+
+## 7. Change the route, not the vocabulary
+
+**Clever paraphrases don't work.** Plain words against a **different database** hit more often.
+Change the discovery mechanism itself: citation graphs, code, dataset back-references, patents,
+non-English sources.
+
+## 8. Every number carries its provenance
+
+**Never mix numbers measured on synthetic data with numbers measured on real data.**
+Put a provenance column in the table. If you can't determine it, write **"unknown."**
+
+## 9. Never select on excitement
+
+How exciting an idea feels at conception is **negatively correlated** with how it scores after
+execution. Select on `cost-to-test` — the cheapest step that would verify it.
+**Impose it at selection time, not at ideation time.**
+
+## 10. Assume ~10% yield when deciding how many candidates to raise
+
+Measured: ~10% of ideas are promising, ~7% are implemented correctly on the first attempt,
+5–6 out of 40 ideas improve anything, 42% of experiments fail on coding errors.
+
+**If you only raise three candidates, zero or one will survive.**
+
+## 11. A gap claim breaking is a success
+
+Gap claims are supposed to get rewritten. **Each break makes the claim more specific and moves its
+support from your own judgment to someone else's words.**
+
+A gap that survived several attacks is stronger than one that was never attacked.
+
+---
+
+## Operational constraints (measured)
+
+- **Connections drop while writing long files in one shot.** Require every agent to
+  "Write a skeleton, then Edit section by section, 100–200 lines per call"
+- If one dies, **resume it with the transcript intact. Do not make it redo the research**
+  (you pay for it twice)
+- **Subagents see none of the parent conversation or its files.** Briefs must stand alone
+- **After compaction, files over 5,000 tokens lose their body** and become a path reference.
+  Split long inputs across subagents by section
+- **WebSearch runs out at 200 calls per agent.** Split hard targets across several agents
+- **Check retrievability before committing to a search plan.** Hit one representative target first
+
+## Retrieval routes that have actually worked
+
+| Route | Where it helps |
+|---|---|
+| **Google Books snippet search** | Springer LNCS/CCIS volumes. Returns **body text verbatim with page numbers** |
+| **Take the WAF cookie first, then hit the PDF directly** | Sites that look like an empty JS shell |
+| **Publicly-funded project sites** | Often obligated to publish results. **Search in the local language** |
+| Co-author's company press material | Companies sometimes post the English full text for free |
+| Institutional repository scans | Even without a text layer, **render to image and read it** |
+| A citing paper's description | When the original is unreachable. **Always label it as second-hand** |
+
+**Never Read a PDF directly.** Check size with `curl -sI` first.
+
+---
+
+## Language
+
+Skills and reference material are written in English so the tool is portable.
+**Artifacts are written in the user's language** — every skill instructs agents accordingly.
+Talk to Claude in Japanese and `synthesis.md` comes out in Japanese.
+
+Japanese terms that name the tool's own metaphor are kept in romanization with the kanji on first
+use — *tatara* (鑪), *tamahagane* (玉鋼), *kera* (鉧), *kanna-nagashi* (鉄穴流し), *murage* (村下).
+Translating them would erase where the metaphor comes from.

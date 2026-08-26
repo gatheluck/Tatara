@@ -1,85 +1,87 @@
-# synthesis — {テーマ名}
+# synthesis — {topic}
 
-**作成 {日付}。** Stage 3–4 の成果物。
+**Written {date}.** The Stage 3–4 deliverable.
 
-材料: 外部 Deep Research {N} 回 + エージェント {N} 体。{行数}
+Material: {N} external Deep Research runs + {N} agents. {line count}
 
-## 読み方
+## How to read this
 
-- **§1 現在地** — 存在の主張。全件検証可能
-- **§2 空白** — **探索範囲を必ず併記**。不在の主張なので反証できる形にした
-- **§3 未決** — 決着していないもの
-- **§4 訂正記録** — 判明した自分の誤り
+- **§1 State of the art** — claims of existence. Every row is verifiable
+- **§2 Gaps** — **always paired with the search scope**. These are claims of absence, so they are
+  written in a form you can falsify
+- **§3 Open** — what is not settled
+- **§4 Corrections** — my own errors, as they came to light
 
-**数値には「素性」列がある。** 合成データの値と実データの値を混ぜないため。
+**Numbers carry a "provenance" column.** So that values from synthetic data and values from real
+data never get mixed.
 
-🔒 = 社外秘。対外文書に転記しないこと。
+🔒 = confidential. Never copy into an external document.
 
 ---
 
-# §1 現在地
+# §1 State of the art
 
-| 研究 | 年 | 入力 | 粒度 | 扱える範囲 | 報告値 | **素性** | 出所 |
+| Work | Year | Input | Granularity | Supported scope | Reported value | **Provenance** | Source |
 |---|---|---|---|---|---|---|---|
-|  |  |  |  |  |  | 合成 / 実 / **不明** | DR / CC / 両方 |
+|  |  |  |  |  |  | synthetic / real / **unknown** | DR / CC / both |
 
-**読み取れること**
+**What can be read off this**
 - {…}
 
-## 1.x 規格・特許・製品
+## 1.x Standards, patents, products
 
-{該当があれば。成立条件を原文で引用する}
+{If there are any. Quote the conditions of applicability verbatim}
 
-## 1.x データ
+## 1.x Data
 
-| 種別 | 状況 |
+| Kind | Status |
 |---|---|
 
-## 1.x 🔒 社内
+## 1.x 🔒 Internal
 
 ---
 
-# §2 空白
+# §2 Gaps
 
-**不在の主張なので、すべてに探索範囲を付ける。**
+**These are claims of absence, so every one of them carries its search scope.**
 
-## 2.1 {空白の名前}
+## 2.1 {name of the gap}
 
-**主張**: {…}
+**Claim**: {…}
 
-**根拠**: {できれば他人の引用。自分の判断より強い}
+**Grounds**: {someone else's words if at all possible. Stronger than your own judgment}
 
-**探索範囲**（{日付} 時点）
-- 外部 Deep Research {N} 回
-- {DB 名}: {クエリの実文字列}
-- **未探索**: {…}
+**Search scope** (as of {date})
+- {N} external Deep Research runs
+- {database}: {the literal query string}
+- **Not searched**: {…}
 
-**最も近い既存研究**: {…}。差分は {…}
+**Closest existing work**: {…}. The difference is {…}
 
 ---
 
-# §3 未決
+# §3 Open
 
-| # | 論点 | 状態 | **決着に必要なもの** |
+| # | Point | State | **What it would take to settle it** |
 |---|---|---|---|
 
 ---
 
-# §4 訂正記録
+# §4 Corrections
 
-| # | 誤り | 正 | 発覚のしかた |
+| # | Error | Correct | How it came to light |
 |---|---|---|---|
 
-## 誤りの型
+## Types of error
 
-{分類できるなら。次回の予防になる}
+{If they can be classified. It prevents the next one}
 
 ---
 
-# §5 次の一手
+# §5 Next moves
 
-{確度の高い順}
+{In descending order of confidence}
 
-## 5.1 やってはいけないこと
+## 5.1 What not to do
 
-{調査中に感じた「言い直したくなる誘惑」を明記しておく。迎合の予防}
+{Write down the "temptation to restate it" you felt during the research. It guards against sycophancy}

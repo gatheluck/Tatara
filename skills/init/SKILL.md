@@ -1,68 +1,74 @@
 ---
-description: 研究テーマの調査プロジェクトを新規作成する。ディレクトリ、context.md、worklog.md を用意して Stage 0 に入れる状態にする。
-argument-hint: <研究テーマの説明>
+description: Create a new research project for a topic. Sets up the directory, context.md, and worklog.md so the project is ready to enter Stage 0.
+argument-hint: <description of the research topic>
 disable-model-invocation: true
 ---
 
-# init — 調査プロジェクトの作成
+# init — create the research project
 
-> 🌱 **炉を築く。** 何を精錬するのかを決め、記録の場所を用意する工程。
+> 🌱 **Build the furnace.** Decide what is going to be smelted, and prepare the place the record lives.
 
-まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。以降すべての工程がこれに従う。
+Read `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` first. Every stage that follows obeys it.
 
-## やること
+**Write every artifact in the user's language.**
 
-研究テーマ「$ARGUMENTS」について、調査プロジェクトを作る。
+## What to do
 
-### 1. 置き場所を決める
+Create a research project for the topic "$ARGUMENTS".
 
-**現在の作業リポジトリ**の `projects/YYYY-MM-DD-{短いスラッグ}/` を作る。日付は今日。
-スラッグは英数字とハイフン。既存の慣習があればそれに合わせる。
+### 1. Decide where it goes
 
-> ⚠️ **このプラグインのリポジトリには絶対に作らない。**
-> 道具と成果物を分ける。成果物には機密（🔒）が含まれることがあり、
-> プラグイン側は公開される想定のため。
+Create `projects/YYYY-MM-DD-{short-slug}/` **in the current working repository**. Use today's date.
+The slug is alphanumerics and hyphens. Follow whatever convention the repository already uses.
+
+> ⚠️ **Never create it inside this plugin's repository.**
+> Keep the tool and the artifacts apart. Artifacts can contain confidential material (🔒),
+> and the plugin side is meant to be published.
 >
-> 現在地がプラグインのリポジトリ内（`skills/` と `.claude-plugin/` がある）なら、
-> **どこに作るかをユーザーに確認する。**
+> If you are currently inside the plugin repository (it has `skills/` and `.claude-plugin/`),
+> **ask the user where to create it.**
 
-**同じリポジトリの `projects/` に他のプロジェクトがあるのは良いこと。**
-Stage 2 のローカル調査がそれらを漁る。外部調査には原理的にできない仕事で、
-蓄積するほど効く。
+**Other projects already sitting in the same `projects/` is a good thing.**
+Stage 2's local mining goes through them. External research cannot do this in principle, and it
+gets more valuable as you accumulate.
 
-### 2. `context.md` を書く
+### 2. Write `context.md`
 
-`${CLAUDE_PLUGIN_ROOT}/templates/context.md` を雛形にする。
+Use `${CLAUDE_PLUGIN_ROOT}/templates/context.md` as the template.
 
-**ユーザーの説明から埋められるものだけを埋める。** 埋まらない欄は
-「未決」と書いて残す。**推測で埋めない。**
+**Fill in only what the user's description supports.** Leave any field you cannot fill marked
+**"unresolved."** Never fill one in by guessing.
 
-特に次は必ず書く。
+These in particular are mandatory.
 
-- **問題設定**（何と何を、どうしたいのか）
-- **なぜ難しそうか** — ただし「作業仮説。調査で確認・反証する対象」と明記する。
-  ここに書いたことを事実として扱わない
-- **分野をまたぐ呼び名の暫定リスト** — Stage 4 の空白潰しの起点になる。
-  **ただしこれを Deep Research のプロンプトに入れてはいけない**（原則 7 / seed leakage）
-- **焦点** — 何を出したいのか。既定は「現在地の把握」と「空白の特定」の 2 つ
+- **The problem statement** (what and what, and what you want done with them)
+- **Why it looks hard** — but state explicitly that this is a working hypothesis, to be confirmed
+  or refuted by the research. Never treat what you wrote here as fact
+- **A provisional list of what this problem is called across fields** — the starting point for
+  closing gaps in Stage 4. **Never put this list into the Deep Research prompt**
+  (Principle 7 / seed leakage)
+- **The focus** — what you want out of this. The default is two things: where the field stands,
+  and where the gap is
 
-### 3. 隣接プロジェクトを探す
+### 3. Look for neighboring projects
 
-リポジトリ内に関連しそうなプロジェクトがあれば `context.md` に列挙する。
-**Stage 2 でここを掘る。外部調査では原理的に得られない情報がある。**
+If anything in the repository looks related, list it in `context.md`.
+**Stage 2 digs here. There is information external research cannot reach in principle.**
 
-### 4. `worklog.md` を作る
+### 4. Create `worklog.md`
 
-空でよい。各 Stage の記録を追記していく。
+Empty is fine. Each stage appends its record.
 
-### 5. 足りない前提を確認する
+### 5. Check for missing premises
 
-**Deep Research は実行回数に上限がある。プロンプトは一発で当てたい。**
-調査の範囲が大きく変わる論点が残っていれば、`AskUserQuestion` でユーザーに聞く。
+**Deep Research has a hard cap on how many times you can run it. The prompt has to land on the
+first try.**
+If a question is still open that would substantially change the scope of the search, ask the user
+with `AskUserQuestion`.
 
-聞くべきなのは「答えによって調べる対象が変わる」ものだけ。
-**答えを保留して調査項目に変えられるなら、聞かずに調査項目にする。**
+Ask only about things where **the answer changes what gets searched.**
+**If you can defer the answer and turn it into a research item instead, do that and don't ask.**
 
-## 終わったら
+## When you're done
 
-次は `/tatara:dr-prompt` と伝える。
+Tell the user the next step is `/tatara:dr-prompt`.

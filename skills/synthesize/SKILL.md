@@ -1,74 +1,85 @@
 ---
-description: Stage 3。外部 Deep Research とこちらの調査を突き合わせ、現在地の表と被覆行列を作る。空白は行列の空セルとして機械的に出す。
-argument-hint: [プロジェクトディレクトリ]
+description: Stage 3. Cross-check external Deep Research against this side's sweep into a state-of-the-art table and a coverage matrix. Gaps fall out mechanically, as empty cells in the matrix.
+argument-hint: [project directory]
 disable-model-invocation: true
 ---
 
-# synthesize — 突き合わせ
+# synthesize — the cross-check
 
-> 🔥 **炉に入れる。** 2 経路の砂鉄を突き合わせ、現在地の表と被覆行列にする。
+> 🔥 **Load the furnace.** Cross-check the satetsu (砂鉄, iron sand) from both routes into a
+> state-of-the-art table and a coverage matrix.
 
-まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。
+Read `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` first.
 
-対象: $ARGUMENTS（省略時は尋ねる）。
+Target: $ARGUMENTS (ask if omitted).
 
-## 入力が大きい場合の扱い
+**Write in the user's language.** Instruct every agent to do the same.
 
-外部 Deep Research の出力は数万字になることがある。
-**compact 後、5,000 トークンを超えるファイルは本文が戻らずパス参照になる。**
+## Handling a large input
 
-→ **メインのコンテキストに読み込まず、観点ごとにサブエージェントへ分けて渡す。**
-各エージェントが DR と こちらの調査の**両方**を読み、その観点で突き合わせる。
+External Deep Research output can run to tens of thousands of characters.
+**After compaction, a file over 5,000 tokens loses its body and becomes a path reference.**
 
-## 立てるエージェント（観点で割る）
+→ **Don't load it into the main context. Split it across subagents, one per dimension.**
+Each agent reads **both** the DR output and this side's sweep, and cross-checks them along its
+own dimension.
 
-### S1. 手法の棚卸しと被覆行列
-統合表を作る。**列は必ず「出所」を含む** — `DR のみ` / `CC のみ` / `両方`。
+## Agents to launch (split by dimension)
 
-そのうえで**被覆行列**を作る。軸はテーマによるが、たとえば
-「対応の粒度 × 扱える範囲 × 注記の扱い」。
+### S1. Method inventory and coverage matrix
+Build the merged table. **It must carry a "source" column** — `DR only` / `CC only` / `both`.
 
-> ⚠️ **空のセルは空のまま残させる。それが何を意味するかは書かせない。**
-> 「ここが新規だ」という判断を**一切させない**。事実の配置だけが仕事。
+Then build the **coverage matrix**. The axes depend on the topic — say,
+"correspondence granularity × supported scope × handling of annotations."
 
-空白は**意見ではなく行列の穴**として出す。解釈は人間がやる。
+> ⚠️ **Make them leave empty cells empty. Never let them write what an empty cell means.**
+> **Never let them judge** "this is where the novelty is." Placing facts is the entire job.
 
-### S2. データと測定可能性
-データセット統合表。**「実アクセス済み」と「記述を読んだのみ」を区別する列**を作る。
-「この問題は現時点で定量評価できるか」について**両者の見解を並置**させる。
-**エージェント自身の判断を書かせない。**
+Gaps come out as **holes in a matrix, not as opinions**. Interpretation is the human's.
 
-### S3. 限界と矛盾 ★後段で最も重要
-- 著者自身が書いた限界を**原文引用**で集約
-- **DR と CC の食い違いをすべて列挙。** 各件に:
+### S2. Data and measurability
+The merged dataset table. **Add a column that separates "actually accessed" from "only read a
+description of."**
+On "can this problem be evaluated quantitatively as things stand," **put both sides' views side by
+side.** **Never let the agent write its own judgment.**
 
-| 論点 | 主張A | 主張B | **根拠の性質A/B** | **決着に必要なもの** |
+### S3. Limitations and contradictions ★the most important one downstream
+- Collect the limitations the authors wrote themselves, **as verbatim quotes**
+- **Enumerate every disagreement between DR and CC.** For each:
 
-**根拠の性質** = `一次文献の原文` / `実アクセスによる実測` / `二次記述` / `推論`
+| Point | Claim A | Claim B | **Nature of evidence A/B** | **What it would take to settle it** |
 
-> **矛盾を解消させない。並べるのが仕事。**
-> どちらが正しいかを断定させない。
+**Nature of evidence** = `verbatim from a primary source` / `measured by actual access` /
+`second-hand description` / `inference`
 
-### S4. 探索範囲の突合
-DR が使った用語（レポート冒頭にあるはず）と、こちらが使った経路を並べる。
-**どちらも探していない領域**を特定する — 語彙 / データベース / 時代 / 言語 / 文献の種類。
+> **Never resolve a contradiction. Laying them out is the job.**
+> Never let them declare which side is right.
 
-**特許と非英語文献を明示的に確認させる。** 実務的な技術は論文に出ていないことがある。
+### S4. Reconciling the search scope
+Line up the terms DR used (they should be at the top of its report) against the routes this side
+took. Identify **the territory neither one searched** — vocabulary / database / era / language /
+document type.
 
-これがそのまま Stage 4 の検索計画になる。
-**ただし計画には「取得可能性」の検査を含めさせる**（立てても取れない DB がある）。
+**Make them check patents and non-English literature explicitly.** Practical technique sometimes
+never reaches a paper.
 
-## 統合は人間側でやる
+This becomes the Stage 4 search plan as it stands.
+**But require the plan to include a retrievability check** (some databases you can name, you cannot
+actually get at).
 
-4 本が揃ったら、`synthesis.md` に自分で組む。**エージェントに書かせない。**
+## The human does the integration
 
-構成:
+Once all four are in, assemble `synthesis.md` yourself. **Never have an agent write it.**
 
-1. **現在地の表** — 全件が存在の主張。**必ず「素性」列**（合成 / 実データ / 不明）
-2. **空白** — 各項に**探索範囲**（クエリ実文字列 / DB / 日付 / 最も近かったもの）
-3. **未決** — 決着していないもの。**決着に必要なもの**を書く
-4. **訂正記録** — 途中で判明した自分の誤り
+Structure:
 
-## 終わったら
+1. **State of the art** — every row is a claim of existence. **A "provenance" column is mandatory**
+   (synthetic / real data / unknown)
+2. **Gaps** — each one carries its **search scope** (literal query strings / databases / date / the
+   nearest hit)
+3. **Open** — whatever is not settled. Write down **what it would take to settle it**
+4. **Corrections** — your own errors, as they came to light along the way
 
-`/tatara:verify`。**空白を壊しにいく。**
+## When you're done
+
+`/tatara:verify`. **Go break the gaps.**

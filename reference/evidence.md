@@ -1,192 +1,208 @@
-# 📚 evidence — 各原則の根拠
+# 📚 evidence — the grounds for each principle
 
-> **Tatara 鑪** の 11 条が、どの事実に基づくか。**一般論ではなく出典と実測。**
+> What the eleven principles of **Tatara (鑪)** actually rest on. **Citations and measurements, not
+> general reasoning.**
 
-[`principles.md`](principles.md) の各条を、実証研究の出典（arXiv 番号つき）と
-実運用の実測値で裏づける。**状況が変われば原則を捨てられるように、根拠を全部書いてある。**
+Each principle in [`principles.md`](principles.md) is backed by published empirical research (with
+arXiv IDs) and by numbers measured in real operation. **The grounds are all written down so that the
+principles can be discarded when the situation changes.**
 
 ---
 
-## 実証研究
+## Empirical research
 
-### LLM のアイデアは新規に見えるが、実行すると目減りする
+### LLM ideas look novel, and lose ground once executed
 
-- **[arXiv:2409.04109](https://arxiv.org/abs/2409.04109)**（Si, Yang, Hashimoto、ICLR 2025 採択）
-  NLP 研究者 100 名超のブラインド評価。**LLM のアイデアは新規性が有意に高い**
-  （4.84 → 5.64、p<0.01）。**feasibility は有意差なし**（p=1.00 / 0.36）
-- **[arXiv:2506.20803](https://arxiv.org/abs/2506.20803)**（Ideation-Execution Gap）
-  43 名が 1 人 **100 時間以上**かけて実装 → **AI 産アイデアのみスコアが有意に下落**
-  （overall −1.976）、差は消滅。人間産はほぼ不変（±0.08 以内）
+- **[arXiv:2409.04109](https://arxiv.org/abs/2409.04109)** (Si, Yang, Hashimoto; accepted at ICLR
+  2025). Blind review by 100+ NLP researchers. **LLM ideas score significantly higher on novelty**
+  (4.84 → 5.64, p<0.01). **No significant difference on feasibility** (p=1.00 / 0.36)
+- **[arXiv:2506.20803](https://arxiv.org/abs/2506.20803)** (Ideation-Execution Gap).
+  43 people spent **100+ hours each** implementing → **only the AI-generated ideas dropped
+  significantly** (overall −1.976), and the gap disappeared. Human-generated ideas barely moved
+  (within ±0.08)
 
-→ **原則 9**（excitement を選定基準にしない）。
-AI 産アイデアでは着想時の excitement と実行後評価が**負の相関**（r=−0.321, ρ=−0.386）。
+→ **Principle 9** (don't select on excitement).
+For AI-generated ideas, excitement at conception is **negatively correlated** with the post-execution
+score (r=−0.321, ρ=−0.386).
 
-### LLM の自己評価は機能しない
+### LLM self-evaluation does not work
 
-同論文より: 最良の pairwise 判定が balanced accuracy **53.3%**、
-人間レビュアー間一致 56.1% に届かない。AI Scientist の reviewer は **43.3%（ランダム以下）**。
+From the same paper: the best pairwise judge reaches balanced accuracy **53.3%**, below the 56.1%
+agreement between human reviewers. The AI Scientist's reviewer sits at **43.3% — worse than random**.
 
-→ **原則 1・4・5**。
+→ **Principles 1, 4, 5**.
 
-### 生成をスケールさせても多様性は増えない
+### Scaling generation does not buy diversity
 
-**4000 seed から非重複 200 件（5%）。** 重複回避を明示指示した上で。
+**200 non-duplicates out of 4000 seeds (5%)** — and that was with an explicit instruction to avoid
+duplicates.
 
-- **arXiv:2605.08956**: 独立プロバイダのモデルが意味的に収束する。
+- **arXiv:2605.08956**: models from independent providers converge semantically.
   *"querying multiple AI systems... is effectively sampling from a single model"*
-- **arXiv:2606.08251**（約 6,749 名の科学者、25,139 評価セット）:
-  **どのモデルも自発的に帰無仮説を提案しない**
+- **arXiv:2606.08251** (~6,749 scientists, 25,139 evaluation sets):
+  **no model proposes a null hypothesis on its own**
 
-→ **原則 7**（語彙より経路）、**原則 10**（歩留まり）。
+→ **Principle 7** (route over vocabulary), **Principle 10** (yield).
 
-### 足場の寄与は小さい
+### Scaffolding contributes little
 
-**arXiv:2604.18805**（8 分野・25,000 超のエージェント実行）:
-分散のうち**ベースモデル 41.4%、足場 1.5%**。
+**arXiv:2604.18805** (8 domains, 25,000+ agent runs):
+of the variance, **41.4% is the base model and 1.5% is the scaffold**.
 *"scaffold engineering alone cannot repair them."*
-同時に「**証拠が 68% の trace で無視される**」。
+The same paper finds that **evidence is ignored in 68% of traces**.
 
-→ **道具立てを凝らない。複雑さは機械的照合に集中させる。**
+→ **Don't over-engineer the tooling. Spend the complexity on mechanical verification.**
 
-### LLM 判定は品質の測定に使えない
+### LLM judging cannot measure quality
 
-| 出典 | 内容 |
+| Source | Finding |
 |---|---|
-| ChemCrow (*Nature MI* 2024) | LLM 判定者は「根拠ある正解」より**流暢な誤り**を好む |
-| Agent Laboratory (arXiv:2501.04227) | 自動レビュアーは人間より **+2.3 点**甘く、人間スコアを予測しない |
-| AI-Researcher (arXiv:2505.18705) | 同一論文について判定者間で **68 ポイント**差 |
-| BadScientist (ACL 2026) | **実験ゼロの捏造論文**が採択率 **52〜82%** |
-| Dycke & Gurevych (arXiv:2508.21422) | 注入した論理的欠陥が自動レビューに**有意な影響なし** |
+| ChemCrow (*Nature MI* 2024) | LLM judges prefer a **fluent error** over a grounded correct answer |
+| Agent Laboratory (arXiv:2501.04227) | The automated reviewer runs **+2.3 points** more generous than humans and does not predict human scores |
+| AI-Researcher (arXiv:2505.18705) | **68 points** of spread between judges on the same paper |
+| BadScientist (ACL 2026) | **Fabricated papers with zero experiments** are accepted **52–82%** of the time |
+| Dycke & Gurevych (arXiv:2508.21422) | Injected logical flaws have **no significant effect** on automated review |
 
-→ **原則 4**。
+→ **Principle 4**.
 
-### 自動新規性判定は失敗する
+### Automated novelty judgment fails
 
-- Beel ら（SIGIR Forum 2025、AI Scientist の唯一の独立再現）:
-  新規性チェックが **12 案すべてを誤って「新規」と分類**
-- HindSight: **LLM 判定の novelty は実インパクトと負の相関**（ρ=−0.29）
-- Dolphin (ACL 2025): 新規性判定を**生成したのと同じモデル**が行う（循環）
-- AutoResearchBench: 最高性能モデルでも**文献発見 9.39%**
+- Beel et al. (SIGIR Forum 2025, the only independent reproduction of the AI Scientist):
+  the novelty check **misclassified all 12 proposals as "novel"**
+- HindSight: **LLM-judged novelty is negatively correlated with real impact** (ρ=−0.29)
+- Dolphin (ACL 2025): the novelty judgment is made by **the same model that did the generating**
+  (circular)
+- AutoResearchBench: even the best-performing model finds only **9.39% of the literature**
 
-→ **原則 1・2**。**文献の 9% しか見つけられない調査から「誰もやっていない」は導けない。**
+→ **Principles 1, 2**. **A search that surfaces 9% of the literature cannot support "nobody has
+done this."**
 
-### 検証ループの中に人工物が隠れる
+### Artifacts hide inside the verification loop
 
-**AI CUDA Engineer**（Sakana AI、2025-02）。10〜100 倍という見出しは、
-システムが**自分の評価ハーネスを悪用**した人工物だった。
-独立再現（EvoEngineer, arXiv:2510.03760）: 公開データで **1.13× → 0.82×**、成功 **63 → 22**。
-正しく再実行した中央値は **1.10〜1.19×**。
-**検出はラボの内部レビューではなく、外部から 48 時間以内に。**
+**AI CUDA Engineer** (Sakana AI, 2025-02). The 10–100× headline turned out to be an artifact of the
+system **exploiting its own evaluation harness**.
+Independent reproduction (EvoEngineer, arXiv:2510.03760): on the public data, **1.13× → 0.82×**,
+successes **63 → 22**. Re-run correctly, the median is **1.10–1.19×**.
+**The catch came from outside within 48 hours, not from the lab's internal review.**
 
-→ **原則 5**。
+→ **Principle 5**.
 
-### 短時間はエージェント、長時間は人間
+### Agents win the short horizon, humans the long one
 
-**RE-Bench**（METR, arXiv:2411.15114）:
-2 時間でエージェントが人間の **4 倍** → 8 時間で逆転 → **32 時間で人間が 2 倍**。
-コストはエージェント $123 対 人間 $1,855。
+**RE-Bench** (METR, arXiv:2411.15114):
+at 2 hours agents are **4×** humans → the lines cross at 8 hours → **at 32 hours humans are 2×**.
+Cost: $123 for the agent versus $1,855 for the human.
 
-### 敵対レビューの指摘は半分近く外れる
+### Nearly half of adversarial review findings miss
 
-**adversarial-loop** の実測: 3 反復あたり actionable な指摘 5〜15 件、**確認率 40〜70%**。
-→ 「レビュー → 全部直す」は誤り。**分類 → 検証 → 直す**。
+Measured on **adversarial-loop**: 5–15 actionable findings per 3 iterations, **40–70% confirmation
+rate**.
+→ "Review, then fix everything" is wrong. **Triage → verify → fix.**
 
-### 歩留まりの実数
+### The actual yield numbers
 
-| 出典 | 数値 |
+| Source | Number |
 |---|---|
-| Carl (Autoscience) | アイデアの **10%** が有望、グリーンライト後の初回実装成功 **7%** |
-| Dolphin | 40 案中 **5〜6 案**が改善、約 **50%** は実行すらされない |
-| Beel ら | 実験の **42%** がコーディングエラーで失敗、原稿の **57%** に幻覚結果 |
+| Carl (Autoscience) | **10%** of ideas are promising; **7%** are implemented correctly on the first attempt after green-light |
+| Dolphin | **5–6 of 40** proposals improve anything; roughly **50%** are never even executed |
+| Beel et al. | **42%** of experiments fail on coding errors; **57%** of manuscripts contain hallucinated results |
 
-→ **原則 10**。
+→ **Principle 10**.
 
-### 幻覚引用は実在する
+### Hallucinated citations are real
 
-- **arXiv:2605.07723**（arXiv 創設者 Ginsparg を含む）: 250 万論文 1.11 億参照を監査。
-  **2025 年だけで 146,932 件**の幻覚引用
-- **arXiv:2607.00738**: 2025 年の NeurIPS / USENIX 論文の**約 20 本に 1 本**が
-  幻覚参照を 2 件以上含む。**検証コストは論文あたり約 $0.04**
+- **arXiv:2605.07723** (authors include arXiv founder Ginsparg): an audit of 111 million references
+  across 2.5 million papers. **146,932 hallucinated citations in 2025 alone**
+- **arXiv:2607.00738**: roughly **1 in 20** NeurIPS / USENIX papers from 2025 contains two or more
+  hallucinated references. **Verification costs about $0.04 per paper**
 
-→ **原則 4**（引用の逐語照合は安い。やらない理由がない）。
+→ **Principle 4** (verbatim citation checking is cheap; there is no reason to skip it).
 
 ---
 
-## 実運用の実測（2026-08、1 回目の適用）
+## Measured in operation (2026-08, first application)
 
-対象は「2D 機械図面と 3D CAD の密な対応付け」。エージェント 14 体 + spike、成果物 9,623 行。
+The subject was a cross-modal correspondence problem. 14 agents plus a
+spike, 9,623 lines of artifacts.
 
-### 2 経路を独立に走らせた結果
+### Running the two routes independently
 
-**直接該当する研究としての重なりは 1 本だけ。**
+**Exactly one paper overlapped as directly relevant work.**
 
-| 出所 | 行数（143 件中） |
+| Origin | Lines (of 143) |
 |---|---|
-| DR のみ | 8 |
-| CC のみ | 126 |
-| 両方 | 9 |
+| DR only | 8 |
+| CC only | 126 |
+| Both | 9 |
 
-**ただし件数と価値は一致しない。** DR の寄与は 8 行だが、
-そのうち 2 本は全調査中で最も直接該当する研究だった。
+**Count and value do not track each other.** DR contributed 8 lines, but two of them were the most
+directly relevant work found in the entire investigation.
 
-**チャネルごとに得意が分かれた** — DR は購読誌の論文を、CC は公開データを見つけた。
+**The channels had different strengths** — DR found papers behind subscriptions, CC found open data.
 
-→ **原則 6**。
+→ **Principle 6**.
 
-### 発見メカニズムを変えた効果
+### The effect of changing the discovery mechanism
 
-「断面図」について、DR は**正しい語を使いながら収穫ゼロ**。
-CC は論文の無い GitHub リポジトリ（★10）の README を起点に引用グラフを辿り、**12 件**に到達。
+On "section views," DR used **the right terms and returned nothing**.
+CC started from the README of a GitHub repository with no associated paper (★10), followed the
+citation graph, and reached **12 hits**.
 
-一方、**凝った別語彙は全滅**した
-（`witness line` / `back-annotation` / `symbol grounding` / `entity linking` …）。
-当たったのは `"engineering drawing" AND "3D model" AND mapping AND dimension`。
+Meanwhile the **clever alternative vocabulary struck out entirely**
+(borrowed jargon from adjacent fields, inverted phrasings, abstract names for the same relation).
+What worked was a plain conjunction of the words a practitioner would use for the problem.
 
-→ **原則 7**。
+→ **Principle 7**.
 
-### 抄録から構造を組み立てて誤った
+### Building structure out of abstracts, and getting it wrong
 
-抄録 2 本の文言から「粒度についての 26 年来の対立」を検出したと報告し、
-さらに自分の spike の実測をその文脈に置いて「対立を実測で決着させた」と述べた。
+Working from the wording of two abstracts, the agent reported detecting "a 26-year-old dispute about
+granularity," then placed its own spike measurements in that context and declared it had "settled the
+dispute empirically."
 
-**本文 8 本を読んだ結果**:
-- **対立は存在しなかった。** 一方の論文の表が両者を「相補的」と明記、直接の論争は文献上に無い
-- 片方の「抄録の一語」が本文では別の語だった
-- **さらに、実測した内容は 1996 年のサーベイ本文に既に書かれていた**
+**After reading 8 full texts:**
+- **There was no dispute.** A table in one of the papers explicitly calls the two approaches
+  "complementary," and no direct controversy exists in the literature
+- One of the two "words in the abstract" is a different word in the body
+- **And the thing it measured was already written out in the body of a 1996 survey**
 
-→ **原則 3**。**この 1 件が最も高くついた。**
+→ **Principle 3**. **This single error was the most expensive one.**
 
-### 空白は 3 回書き換わった
+### The gap was rewritten three times
 
-| 版 | 主張 | 壊れ方 |
+| Version | Claim | How it broke |
 |---|---|---|
-| 1 | この粒度は誰もやっていない | **破壊**。別言語圏に 15 年前の蓄積、しかも既知系譜の**上流** |
-| 2 | 対応が与えられていない状態で発見する研究は無い | 部分的に生存 |
-| 3 | 逆問題を解いた例が無い | **最も近い先行研究の著者自身が「困難で、現時点でよい解決法はない」と明記** |
+| 1 | Nobody has worked at this granularity | **Destroyed.** 15 years of work in another language, and **upstream** of a lineage we already knew |
+| 2 | No work discovers correspondences when none are given | Partially survived |
+| 3 | No one has solved the inverse problem | **The author of the nearest prior work states outright that it is "difficult, with no good solution at present"** |
 
-**根拠が自分の判断から他人の引用に移った。**
+**The support moved from my own judgment to someone else's words.**
 
-→ **原則 11**。
+→ **Principle 11**.
 
-### spike は自分の誤りを 5 件炙り出した
+### The spike exposed five of my own errors
 
-距離ゼロでの誤照合 / 要素の重複列挙 / 早期 break / メソッド名の取り違え / 引数の数。
+Mismatches at zero distance / double-counted elements / an early `break` / a wrong method name / the
+wrong number of arguments.
 
-**すべて実行するたびに 1 つずつ発覚した。議論では 1 件も見つからなかった。**
+**Each one surfaced on a run, one per run. The discussion found none of them.**
 
-### 運用上の制約
+### Operational constraints
 
-- **接続断 4 回。** すべて「調査完了後、長文を書き出している最中」
-- **WebSearch は 1 エージェント 200 回で尽きる。** 有効な迂回路が途中で封じられた
-- **計画した検索先の一部が実行不能。** Espacenet / J-PlatPat / WIPO は静的取得不可、
-  Google Patents は 17 クエリで IP ブロック
-- **1 行返すだけのエージェントが 49,271 トークン**を消費（前置きぶん）。
-  ただし同一 run 内で形が揃うエージェントはプロンプトキャッシュを共有する
+- **Four connection drops.** Every one of them while writing out a long file after the research was
+  already finished
+- **WebSearch runs out at 200 calls per agent.** A working detour got cut off mid-way
+- **Some of the planned search targets turned out to be unusable.** Espacenet / J-PlatPat / WIPO
+  cannot be fetched statically, and Google Patents IP-blocked us after 17 queries
+- **An agent that returned a single line burned 49,271 tokens** (all preamble). That said, agents
+  with matching shapes inside the same run share the prompt cache
 
-### 取得に成功した経路
+### Retrieval routes that worked
 
-- **Google Books のスニペット検索** — Springer CCIS 巻。全経路失敗と報告された論文を突破。
-  **頁番号つきで本文が逐語**で返った
-- **WAF cookie を先に取ってから PDF 直リンク** — 「空の JS シェル」と報告されたサイト
-- **公的助成プロジェクトのサイト**（現地語で検索）、共著企業の広報
-- **機関リポジトリのスキャンを画像化して判読**（8 本中 4 本）
+- **Google Books snippet search** — Springer CCIS volumes. Broke through on a paper reported as
+  unreachable by every other route. **Returned body text verbatim, with page numbers**
+- **Take the WAF cookie first, then hit the PDF link directly** — for sites reported as "an empty JS
+  shell"
+- **Publicly-funded project sites** (searched in the local language), and co-author companies' press
+  material
+- **Rendering institutional-repository scans to image and reading them** (4 of 8)

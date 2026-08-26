@@ -2,370 +2,393 @@
 
 # 🔥 Tatara 鑪
 
-**散らばった文献という砂鉄から、研究の「現在地」と「空白」を精錬して取り出す。**
+**Smelt the scattered literature down to two things: where the field actually stands, and where nobody has been.**
 
-Claude Code のプラグインです。
+A plugin for Claude Code.
 
 </div>
 
 ---
 
-## ⚒️ なぜ「タタラ」なのか
+## ⚒️ Why "Tatara"?
 
-**たたら製鉄**は、砂鉄と木炭を炉に入れ、三日三晩焚き続けて鉄を得る日本古来の製鉄法です。
-そこで採れる **玉鋼（たまはがね）** が、日本刀の刃になります。
+**Tatara (鑪)** is the traditional Japanese iron smelting process. You load a clay furnace with
+*satetsu* (砂鉄, iron sand) and charcoal, and keep it burning for three days and three nights.
+What comes out is **tamahagane (玉鋼)** — the steel that becomes the cutting edge of a Japanese sword.
 
-この道具が研究に対して果たす役割が、たたらが刀に対して果たす役割と同じでした。
+The role this tool plays for research is the role tatara plays for the sword.
 
-> **たたらは、刀を打つ工程ではありません。刀を打つための素材を作る、その前の工程です。**
-> そして刀の出来は、ここで得た玉鋼の質に律速されます。
+> **Tatara is not the forging. It is the step before forging, the one that makes the material.**
+> And the quality of the blade is capped by the quality of the tamahagane you got here.
 
-研究も同じです。実験も執筆もその先にありますが、**何を問いにするか**がここで決まります。
-そして問いの筋は、この段階で分野の地形をどれだけ正確に読めたかに律速されます。
+Research works the same way. The experiments and the writing come later, but **what question you
+ask** is decided here — and how good that question is depends on how accurately you read the
+terrain at this stage.
 
-### 工程がそのまま対応します
+### The stages map one to one
 
-| たたら 🔥 | この道具 |
+| Tatara 🔥 | This tool |
 |---|---|
-| **鉄穴流し** — 山を崩して水路に流し、**比重の差で砂鉄だけを残す** | **Stage 1–2** — 2 つの独立した経路で掃引し、一次情報だけを残す |
-| **炉入れ** — 砂鉄と木炭を、三日三晩 | **Stage 3** — 突き合わせて、現在地の表と被覆行列にする |
-| **村下（むらげ）が炎の色を読む** | **人間の判断点。** 機械に任せない |
-| **鉧（けら）を割る** — 玉鋼・鉧・鉄滓に選り分ける | **Stage 4** — 空白を壊しにいき、**残ったものだけを取る** |
-| 玉鋼として使えるのは、出てきた塊のごく一部 | **歩留まりは 1 割前後**（→ 原則 10） |
+| **Kanna-nagashi (鉄穴流し)** — break down the hillside, sluice it through channels, and let **specific gravity separate out the iron sand** | **Stage 1–2** — sweep along two independent routes, keep only primary sources |
+| **Load the furnace** — iron sand and charcoal, three days and three nights | **Stage 3** — cross-check the two sweeps into a state-of-the-art table and a coverage matrix |
+| **The murage (村下) reads the color of the flame** | **The human decision point.** Not delegated to a machine |
+| **Break the kera (鉧)** — sort the bloom into tamahagane, iron, and slag | **Stage 4** — go break your own gap claim, and **keep only what survives** |
+| Only a fraction of the bloom is usable as tamahagane | **Yield is around 10%** (→ Principle 10) |
 
-**鉄滓を捨てるのは失敗ではなく、工程です。**
-この道具でも、空白の主張が壊れるのは成功です（→ 原則 11）。
+**Throwing away slag is not failure. It is the process.**
+Here too, a gap claim that collapses is a success (→ Principle 11).
 
-### 🐎 Abumi との関係
+### 📔 Glossary
 
-作者の別プロジェクト **Abumi（鐙）** は、常時稼働のエージェントハーネスです。
-鐙は鍛えた鉄具で、**人が馬上でしっかり立てるようにする道具**です。
+Japanese terms are kept in romanization with the kanji, rather than translated — translating them
+erases where the metaphor comes from.
 
-> **たたらが素材を作り、鐙が人を立たせる。**
+| Term | Kanji | What it is |
+|---|---|---|
+| **tatara** | 鑪 | The traditional Japanese iron smelting furnace, and the process run in it |
+| **satetsu** | 砂鉄 | Iron sand. The raw input, scattered through ordinary hillside soil |
+| **kanna-nagashi** | 鉄穴流し | Sluicing the hillside through water channels so specific gravity separates the iron sand out |
+| **kera** | 鉧 | The bloom — the mass pulled from the furnace at the end of a run |
+| **tamahagane** | 玉鋼 | The highest grade of steel sorted out of the kera. Becomes the cutting edge of a sword |
+| **murage** | 村下 | The master smelter, who judges the furnace by the color of the flame |
+| **abumi** | 鐙 | A stirrup. The author's other project, named for the tool that lets a rider stand firm |
 
-道具の依存関係もそのとおりです。**Tatara で研究の筋を決め、Abumi で回す。**
+### 🐎 Relationship to Abumi
+
+The author's other project, **Abumi (鐙)**, is an always-on agent harness. An *abumi* is a stirrup —
+forged iron tack, the thing that **lets a rider stand firm**.
+
+> **Tatara makes the material. Abumi lets you stand.**
+
+The dependency between the tools runs the same way. **Scope the research with Tatara, then run it
+with Abumi.**
 
 ---
 
-## 📖 目次
+## 📖 Contents
 
-- [🎯 何のための道具か](#-何のための道具か)
-- [📦 インストール](#-インストール)
-- [🚀 クイックスタート](#-クイックスタート)
-- [📂 **成果物はどこに増えるのか**](#-成果物はどこに増えるのか) ← 運用で最初に読む
-- [🛠️ 各 skill](#️-各-skill)
-- [📐 設計の根拠](#-設計の根拠)
-- [🩹 困ったとき](#-困ったとき)
+- [🎯 What this is for](#-what-this-is-for)
+- [📦 Install](#-install)
+- [🚀 Quickstart](#-quickstart)
+- [📂 **Where the output accumulates**](#-where-the-output-accumulates) ← read this first in practice
+- [🛠️ The skills](#️-the-skills)
+- [📐 Why it is built this way](#-why-it-is-built-this-way)
+- [🩹 Troubleshooting](#-troubleshooting)
 
 ---
 
-## 🎯 何のための道具か
+## 🎯 What this is for
 
-出したいのは 2 つだけです。
+There are only two outputs.
 
-| 出力 | 中身 |
+| Output | What it is |
 |---|---|
-| 📊 **「既存の手法だとここまでできる」** | 実数つきの現在地 |
-| 🕳️ **「ここはまだ誰もやっていない」** | 探索範囲つきの空白 |
+| 📊 **"Here is what existing methods can do"** | The state of the art, with actual numbers |
+| 🕳️ **"Here is what nobody has done"** | The gap, with the search scope that backs it |
 
-### ✅ 向いている場面
+### ✅ Good fit
 
-- 新しい研究テーマを始めるとき、**その分野の現在地を把握したい**
-- 「これって誰かやってないか？」を、**印象ではなく記録が残る形で**確かめたい
-- 論文の位置づけや提案の新規性を、**後から反証できる形で**書きたい
+- Starting a new research topic and needing to **map where the field actually stands**
+- Wanting to check "has someone already done this?" **in a form that leaves a record**, not an impression
+- Writing up novelty or positioning **so that a reader can falsify it later**
 
-### ❌ 向いていない場面
+### ❌ Bad fit
 
-- 実装そのもの（この道具はテーマを固めるところまで）
-- 単発の事実確認（普通に検索したほうが速い）
-- 答えが 1 つに決まっている問い
+- The implementation itself (this tool stops at settling the topic)
+- One-off fact lookups (just search)
+- Questions with a single determinate answer
 
-### 🧭 この道具が守っていること
+### 🧭 What this tool refuses to do
 
-**新規性をモデルに聞きません。**
-「これは新規か？」は不在の証明で、検証できません。代わりに
-**「最も近い既存研究は何で、どこがどう違うか」** を出させます。
-出力が判断ではなく**出典**になり、読んだ人が確かめられます。
+**It never asks a model whether something is novel.**
+"Is this novel?" is a claim of absence, and absence cannot be verified. Instead it asks
+**"What is the closest existing work, and exactly how does it differ?"**
+The output becomes a **citation** rather than a judgment, and a reader can go check it.
 
-**空白には必ず探索範囲を付けます。**
-「誰もやっていない」ではなく
-**「A・B・C を YYYY-MM-DD 時点で探した範囲では見つからなかった。最も近いのは X」** と書きます。
+**Every gap claim carries its search scope.**
+Not "nobody has done this," but
+**"Not found across A, B, and C as of YYYY-MM-DD. The closest is X."**
 
-**空白は壊しにいきます。**
-Stage 4 の仕事は自分の主張を潰すことです。壊れるたびに主張が具体的になり、
-根拠が**自分の判断から他人の引用に移ります**。
+**It goes after its own gap claims.**
+Stage 4's job is to destroy your claim. Each time one breaks, the claim gets more specific and its
+support **moves from your own judgment to someone else's words**.
 
 ---
 
-## 📦 インストール
+## 📦 Install
 
-### 🧪 まず試す
+### 🧪 Try it
 
 ```bash
 claude --plugin-dir /path/to/tatara
 ```
 
-起動後 `/help` の **Custom commands** タブに `tatara:` が 6 件出れば成功です 🎉
+After it starts, open `/help` → **Custom commands**. Six entries under `tatara:` means you're set 🎉
 
-### 🏠 常用する
+### 🏠 Keep it
 
-`~/.claude/skills/` の下に置くと、次のセッションから自動で読まれます。
+Drop it under `~/.claude/skills/` and it loads automatically from the next session.
 
 ```bash
 git clone <this-repo> ~/.claude/skills/tatara
 ```
 
-チームで使うなら [plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces) 経由。
+For a team, distribute through a
+[plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces).
 
-編集したら `/reload-plugins` で反映されます。
+Run `/reload-plugins` after editing.
+
+> 🌏 **Language.** The skills are written in English, but they instruct agents to write in
+> **your** language. Talk to Claude in Japanese and the artifacts come out in Japanese.
 
 ---
 
-## 🚀 クイックスタート
+## 🚀 Quickstart
 
-**研究用のリポジトリ**（成果物を貯めるところ。詳細は次節）で Claude Code を起動して:
+Start Claude Code **in your research repository** (where the output lives — see the next section):
 
-### 1️⃣ 場を用意する
+### 1️⃣ Build the furnace
 
 ```
-/tatara:init 2D機械図面と3D CADの密な対応付け
+/tatara:init differentiable solvers for fluid simulation
 ```
 
-`projects/2026-08-25-2d-3d-dense-correspondence/` と `context.md` ができます。
-足りない前提があれば聞かれます。
+Creates `projects/2026-08-25-differentiable-fluid-solvers/` and a `context.md`.
+It will ask about anything load-bearing that's missing.
 
-### 2️⃣ 砂鉄を集める（外部 Deep Research）
+### 2️⃣ Gather iron sand (external Deep Research)
 
 ```
 /tatara:dr-prompt
 ```
 
-`deep-research-prompt.md` ができます。**中のプロンプト本文を ChatGPT 等に貼って**、
-結果を **Markdown でダウンロード**して `deep-research-output.md` に無編集で保存してください。
+Produces `deep-research-prompt.md`. **Paste the prompt body into ChatGPT (or similar)**, then
+**download the result as Markdown** and save it to `deep-research-output.md` unedited.
 
-> 💡 ここだけ人手が要ります。外部 Deep Research が UI からしか使えないためです。
+> 💡 This is the only manual step. External Deep Research is UI-only.
 
-### 3️⃣ 別の経路でも集める
+### 3️⃣ Gather along a different route
 
 ```
 /tatara:sweep
 ```
 
-**外部 DR の完了を待たずに、並行して始められます。**
-むしろ独立性のために、**DR の結果を見る前に始めるほうが良い**です。
+**You can start this without waiting for the external run to finish.** In fact you *should* start
+it before reading those results — that's what keeps the two routes independent.
 
-### 4️⃣ 炉に入れる
+### 4️⃣ Load the furnace
 
 ```
 /tatara:synthesize
 ```
 
-両者を突き合わせて `synthesis.md`（現在地の表 + 被覆行列）を作ります。
+Cross-checks both sides into `synthesis.md` — the state-of-the-art table and the coverage matrix.
 
-### 5️⃣ 鉧を割る
+### 5️⃣ Break the kera
 
 ```
 /tatara:verify
 ```
 
-**空白を壊しにいきます。** 特許・非英語文献・未読の一次情報を取りにいき、
-「誰もやっていない」が本当かを確かめます。
+**Goes after the gap.** Patents, non-English literature, primary sources nobody actually read —
+whatever it takes to find out if "nobody has done this" holds up.
 
-### 🔨 いつでも: 実行で決着させる
+### 🔨 Any time: settle it by running it
 
 ```
-/tatara:spike OCCTのHLR出力から親エンティティIDを回収できるか
+/tatara:spike does the tokenizer's offset mapping survive normalization?
 ```
 
-議論で割れているものを、最小のコードを書いて実行で決着させます。
+Takes a technical dispute and settles it with the smallest program that decides it.
 
 ---
 
-## 📂 成果物はどこに増えるのか
+## 📂 Where the output accumulates
 
-### 🚫 原則: このリポジトリには何も貯まりません
+### 🚫 Nothing accumulates in this repository
 
-**ここは道具だけです。** 研究の成果物は、
-**あなたが Claude Code を起動したリポジトリ**の中に作られます。
+**This repo holds the tool only.** Research artifacts are created **in whichever repository you
+started Claude Code in.**
 
-事故防止のため、このリポジトリの `.gitignore` は `projects/` を無視します。
-うっかりここで作業しても、成果物が道具に混ざりません。
+As a guard, this repo's `.gitignore` excludes `projects/`. If you slip and work here, the artifacts
+don't contaminate the tool.
 
-### 🗂️ 想定するリポジトリ構成
+### 🗂️ Expected layout
 
 ```
 ~/your-workspace/
-├── tatara/                      🔥 この道具（公開してよい）
+├── tatara/                      🔥 the tool (safe to publish)
 │   ├── skills/
 │   ├── reference/
 │   └── templates/
 │
-└── your-research-repo/          📚 成果物（機密を含む。公開しない）
+└── your-research-repo/          📚 the artifacts (may contain confidential material)
     └── projects/
-        ├── 2026-08-25-2d-3d-dense-correspondence/
-        ├── 2026-09-10-brep-partial-search/
-        └── 2026-10-02-drawing-synthesis-bench/
+        ├── 2026-08-25-differentiable-fluid-solvers/
+        ├── 2026-09-10-long-context-retrieval-eval/
+        └── 2026-10-02-sparse-moe-routing/
 ```
 
-**成果物のリポジトリは既存のもので構いません。** `projects/` があればそこに追加され、
-無ければ作られます。既存の命名規則があればそれに合わせます。
+**Your research repo can be one you already have.** If `projects/` exists, topics land there; if
+not, it gets created. Existing naming conventions are followed.
 
-### 📁 1 つのプロジェクトの中身
+### 📁 Inside one project
 
-各プロジェクトは**自己完結**します。
+Each project is **self-contained**.
 
 ```
-projects/2026-08-25-{slug}/
-├── context.md                  問題設定・焦点・未決事項
-├── deep-research-prompt.md     Stage 0。送信後は改変しない（再現性の記録）
-├── deep-research-output.md     Stage 1。無編集で保存
-├── cc-research/                Stage 2。エージェントごとに 1 ファイル
-├── synthesis/                  Stage 3。観点ごとの突き合わせ
-├── synthesis.md                ⭐ 成果物。現在地 + 空白 + 未決 + 訂正記録
-├── verify/                     Stage 4。空白潰し・一次情報回収・spike
-│   └── spike_*.py                spike のスクリプトは全版残す
-├── plan.md                     （テーマが固まったら）研究計画
-└── worklog.md                  各 Stage の記録と判断の経緯
+projects/YYYY-MM-DD-{slug}/
+├── context.md                  problem, focus, open questions
+├── deep-research-prompt.md     Stage 0. Never edited after sending (reproducibility record)
+├── deep-research-output.md     Stage 1. Saved verbatim
+├── cc-research/                Stage 2. One file per agent
+├── synthesis/                  Stage 3. One file per cross-check dimension
+├── synthesis.md                ⭐ the deliverable: state of the art + gaps + open + corrections
+├── verify/                     Stage 4. Gap attacks, primary-source retrieval, spikes
+│   └── spike_*.py                every version of a spike script is kept
+├── plan.md                     research plan, once the topic settles
+└── worklog.md                  what happened at each stage, and why
 ```
 
-> 📖 **読むのは `synthesis.md` だけで足ります。**
-> 1 プロジェクトで 5,000〜10,000 行になりますが、読むのは 300 行程度です。
-> 他は根拠を辿るときの参照用。
+> 📖 **You only need to read `synthesis.md`.**
+> A project runs 5,000–10,000 lines, but the part you read is about 300.
+> The rest is there for when you want to trace a claim back to its source.
 
-### 🔗 複数プロジェクトを 1 箇所に貯める意味
+### 🔗 Why keep all projects in one place
 
-**`projects/` に貯めると、後のプロジェクトが前のプロジェクトを読めます。**
+**Topics stored under `projects/` can be read by later topics.**
 
-Stage 2 には「ローカル文脈の掘り起こし」を担当するエージェントがいて、
-**同じリポジトリの他のプロジェクトを漁ります**。
-外部の Deep Research には原理的にできない仕事で、**蓄積するほど効きます**。
+Stage 2 includes an agent whose job is mining local context — it **goes through the other projects
+in the same repository**. External Deep Research cannot do this in principle, and it **gets more
+valuable as you accumulate**.
 
-1 回目の適用では、隣接プロジェクトからこれが出ました。
+On the first real run, that agent surfaced:
 
-- そのテーマが**既に組織の公式研究目標**だったこと
-- **社内ベンチマークに該当タスクが既にあった**こと。その実測値
-- 順方向（逆問題の反対側）で既に判明していた技術的制約
-- 過去の**失敗の記録 23 件**
+- that the topic was **already an official research objective of the organization**
+- that an **internal benchmark already contained the exact task**, with measured numbers
+- technical constraints already established on the forward direction of the same problem
+- **23 recorded failures**
 
-→ **成果物は 1 箇所にまとめて貯めるほうが良い**、というのがこの設計の含意です。
+→ The design implication: **keep the artifacts together in one repository.**
 
-### 🔒 機密の扱い
+### 🔒 Confidential material
 
-Stage 2 のローカル調査は、**社外に出せない情報を拾います。**
+Stage 2's local mining **picks up things that cannot leave the building.**
 
-- 各 skill は機密項目に **🔒** を付け、**独立した節に分離**するよう指示しています
-- `synthesis.md` は §1〜§3 を公開情報のみ、機密は別節に隔離する構成です
-- ⚠️ **成果物のリポジトリを public にしないでください。**
-  public にするなら、🔒 節を機械的に除去する工程を別途用意してください
+- Every skill instructs agents to tag such items with **🔒** and **isolate them in a separate section**
+- `synthesis.md` keeps §1–§3 public-only, with confidential material quarantined
+- ⚠️ **Do not make the artifact repository public.** If you must, build a step that mechanically
+  strips 🔒 sections first
 
-**この道具自体は機密を含みません。** 公開して問題ないのは道具のほうだけです。
+**The tool itself contains nothing confidential.** Only this side is safe to publish.
 
 ---
 
-## 🛠️ 各 skill
+## 🛠️ The skills
 
-| skill | Stage | 何をするか | 人手 |
+| Skill | Stage | What it does | Manual work |
 |---|---|---|---|
-| 🌱 `init` | — | プロジェクトの雛形を作る。足りない前提を聞く | 質問に答える |
-| 📝 `dr-prompt` | 0 | 外部 DR 用のプロンプトを生成 | **貼る・保存する** |
-| ⛏️ `sweep` | 2 | こちら側で独立に調査（複数エージェント並列） | なし |
-| 🔥 `synthesize` | 3 | 突き合わせ → 現在地の表 + 被覆行列 | なし |
-| 🔨 `verify` | 4 | **空白を壊しにいく**。一次情報の回収 | なし |
-| ⚡ `spike` | 随時 | 技術的な争点を**実行で**決着させる | 依存の導入を承認 |
+| 🌱 `init` | — | Scaffold the project. Ask about missing premises | answer questions |
+| 📝 `dr-prompt` | 0 | Generate the prompt for external Deep Research | **paste and save** |
+| ⛏️ `sweep` | 2 | Investigate independently on this side (parallel agents) | none |
+| 🔥 `synthesize` | 3 | Cross-check → state-of-the-art table + coverage matrix | none |
+| 🔨 `verify` | 4 | **Go break the gap.** Retrieve unread primary sources | none |
+| ⚡ `spike` | any | Settle a technical dispute **by executing** | approve installs |
 
-### ❓ なぜ段階が分かれているのか
+### ❓ Why separate stages?
 
-Claude Code の dynamic workflow は**実行中のユーザー入力を受け付けません**。
-公式ドキュメントいわく「段階間で承認を挟むなら、各段階を個別に実行すること」。
-好みではなく制約です。
+Claude Code's dynamic workflows **cannot take user input mid-run**. Per the official docs: "For
+sign-off between stages, run each stage as its own workflow." This isn't a preference — it's a
+constraint.
 
 ---
 
-## 📐 設計の根拠
+## 📐 Why it is built this way
 
-**この道具は薄く作ってあります。** skill は合計 470 行、原則が 121 行。
+**The tool is deliberately thin.** 470 lines of skills, 121 lines of principles.
 
-理由は実測です。
+The reason is measured.
 
-> 性能と挙動の分散のうち、**ベースモデルが 41.4%、足場（scaffold）が 1.5%**
-> — arXiv:2604.18805（8 分野・25,000 超のエージェント実行）
+> Of the explained variance in performance and behavior, **the base model accounts for 41.4% and
+> the scaffold for 1.5%**
+> — arXiv:2604.18805 (8 domains, 25,000+ agent runs)
 
-手順を凝っても得られるのは 1.5% の側です。**複雑さは「機械的照合」に集中させています。**
-同じ論文が「証拠が 68% の trace で無視される」とも報告しており、
-**証拠との突き合わせを機械にやらせたときだけ、そこが埋まる**からです。
+Elaborate procedure buys you the 1.5% side. So **the complexity budget goes entirely into mechanical
+checking** instead. The same paper reports that **evidence is ignored in 68% of traces** — that gap
+only closes when a machine is made to do the cross-checking.
 
-### 📜 中心は 11 条
+### 📜 Eleven principles at the center
 
 [`reference/principles.md`](reference/principles.md)
 
-| # | 原則 |
+| # | Principle |
 |---|---|
-| 1 | **新規性をモデルに聞かない** — 「最も近い既存研究は何で、どこがどう違うか」を出させる |
-| 2 | **空白は必ず探索範囲とセット** — クエリ実文字列 / DB / 日付 / 最も近かったもの |
-| 3 | **抄録から構造的な主張を組み立てない** — 最も高くつく誤り |
-| 4 | **LLM に品質を判定させない** — 照合可能なものだけ |
-| 5 | **検証手段を生成側の外に置く** |
-| 6 | **2 経路を独立に走らせ、片方の結論を確定として扱わない** |
-| 7 | **語彙より経路を変える** |
-| 8 | **数値は必ず「素性」とセット** — 合成か実データか |
-| 9 | **excitement を選定基準にしない** — `cost-to-test` を使う |
-| 10 | **歩留まりは 1 割前後を前提に数を決める** |
-| 11 | **空白が壊れるのは成功** |
+| 1 | **Never ask a model whether something is novel** — ask for the closest work and the exact difference |
+| 2 | **Every gap claim carries its search scope** — literal queries, databases, date, nearest hit |
+| 3 | **Never build a structural claim out of abstracts** — the most expensive mistake |
+| 4 | **Never let an LLM judge quality** — only things that can be checked |
+| 5 | **Keep the verifier outside the generator** |
+| 6 | **Run two routes independently; neither one's conclusion is final alone** |
+| 7 | **Change the route, not the vocabulary** |
+| 8 | **Every number carries its provenance** — synthetic or real |
+| 9 | **Never select on excitement** — select on `cost-to-test` |
+| 10 | **Assume ~10% yield when deciding how many candidates to raise** |
+| 11 | **A gap claim breaking is a success** |
 
-各条の根拠は [`reference/evidence.md`](reference/evidence.md) にあります。
-**出典（arXiv 番号つき）と実測値**を全部書いてあるので、
-状況が変わったときに「この原則はもう要らない」と判断できます。
+Each one is backed in [`reference/evidence.md`](reference/evidence.md), with **citations (arXiv IDs)
+and measured numbers**. The grounds are written out so that you can decide a principle is obsolete
+when the situation changes.
 
-### 🧪 適用実績
+### 🧪 Track record
 
-**1 回目**: 「2D 機械図面と 3D CAD の密な対応付け」（2026-08）。
-エージェント 14 体 + spike 4 版、成果物 9,623 行。
+**Run 1**: a cross-modal correspondence problem (2026-08).
+14 agents plus 4 spike iterations, 9,623 lines of artifacts.
 
-- 🔨 空白の主張が **3 回書き換わり**、最終的に**最も近い先行研究の著者自身の引用**で裏づいた
-- ⚡ spike が**自分の誤りを 5 件**炙り出した（**議論では 1 件も出なかった**）
-- 🔀 独立 2 経路の重なりは**論文 1 本だけ**。単独では大半を取り逃していた
-- 📋 **誤りを 10 件記録**。うち 2 件は原則 3 の違反（抄録から構造を作った）
+- 🔨 The gap claim was **rewritten three times**, ending up supported by **the closest prior work's
+  own author saying the problem was unsolved**
+- ⚡ The spike surfaced **five of my own errors** (**zero were found by discussion**)
+- 🔀 The two independent routes overlapped on **exactly one paper**. Either alone would have missed most of it
+- 📋 **Ten errors recorded**, two of them violations of Principle 3 (structure built from abstracts)
 
 ---
 
-## 🩹 困ったとき
+## 🩹 Troubleshooting
 
 <details>
-<summary><b>skill が出てこない</b></summary>
+<summary><b>The skills don't show up</b></summary>
 
-`/reload-plugins` を実行。それでも出なければ `claude plugin validate <path>` で確認。
-`skills/` などが `.claude-plugin/` の**中**に入っていないか確認してください
-（plugin root 直下が正しい）。
+Run `/reload-plugins`. If that doesn't do it, run `claude plugin validate <path>`.
+Check that `skills/` and friends are **not** inside `.claude-plugin/` — they belong at the plugin root.
 </details>
 
 <details>
-<summary><b>エージェントが長文の書き出し中に落ちる</b></summary>
+<summary><b>An agent dies while writing a long file</b></summary>
 
-既知です。各 skill は「Write で骨子 → Edit で節ごと」を課していますが、それでも起きます。
-**再調査させず、`SendMessage` で transcript を保持したまま再開**させてください。
-失われるのは出力だけで、調査結果はエージェントの中に残っています。
+Known. Every skill already requires "Write a skeleton, then Edit section by section," and it still
+happens. **Don't re-run the research — resume with `SendMessage` so the transcript survives.**
+Only the output was lost; the findings are still in the agent.
 </details>
 
 <details>
-<summary><b>検索が途中で効かなくなる</b></summary>
+<summary><b>Search stops working partway through</b></summary>
 
-WebSearch は 1 エージェント 200 回で尽きます。難物は対象を絞って複数体に分けてください。
+WebSearch runs out at 200 calls per agent. Split hard targets across several narrowly-scoped agents.
 </details>
 
 <details>
-<summary><b>特許データベースにアクセスできない</b></summary>
+<summary><b>Patent databases are unreachable</b></summary>
 
-Espacenet / J-PlatPat / WIPO は静的取得では使えません。
-Google Patents は十数クエリで IP ブロックされます。
-**ブラウザで開けば通ることが多い**ので、決定的な 1 件は手で取るのが速いです。
+Espacenet, J-PlatPat, and WIPO Patentscope don't work with static fetching.
+Google Patents IP-blocks after roughly a dozen queries.
+**A browser usually gets through**, so grabbing the one decisive document by hand is faster.
 </details>
 
 <details>
-<summary><b>購読壁で本文が読めない</b></summary>
+<summary><b>A paywall is blocking the full text</b></summary>
 
-[`reference/principles.md`](reference/principles.md) の「一次情報を取りにいく手引き」に
-実証済みの経路があります（Google Books のスニペット検索、WAF cookie の先取りなど）。
-**「全経路失敗」と報告されたものが別経路で取れた実例が複数あります。**
+[`reference/principles.md`](reference/principles.md) has a section of retrieval routes that have
+actually worked (Google Books snippet search, taking the WAF cookie before hitting the PDF, and
+others). **Several documents reported as "all routes failed" were retrieved through a different one.**
 </details>
 
 ---
@@ -374,6 +397,8 @@ Google Patents は十数クエリで IP ブロックされます。
 
 **MIT License**
 
-🔥 *砂鉄から玉鋼へ* 🗡️
+🔥 *satetsu* (砂鉄) → *tamahagane* (玉鋼) 🗡️
+
+<sub>from iron sand to sword steel</sub>
 
 </div>

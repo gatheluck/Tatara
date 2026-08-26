@@ -1,88 +1,101 @@
 ---
-description: 外部 Deep Research（ChatGPT 等）に渡すプロンプトを生成する。Stage 0。人間がコピーして実行する。
-argument-hint: [プロジェクトディレクトリ]
+description: Generate the prompt to hand to an external Deep Research service (ChatGPT or similar). Stage 0. A human copies it and runs it.
+argument-hint: [project directory]
 disable-model-invocation: true
 ---
 
-# dr-prompt — 外部 Deep Research 用プロンプトの生成
+# dr-prompt — generate the prompt for external Deep Research
 
-> ⛏️ **砂鉄を採りにいく（外部経路）。** 外の Deep Research に何を掘らせるかを決める工程。
+> ⛏️ **Go collect the satetsu (砂鉄) — the external route.** Decide what the outside Deep Research gets sent to dig for.
 
-まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。
+Read `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` first.
 
-対象プロジェクト: $ARGUMENTS（省略時は直近のもの、または尋ねる）
-その `context.md` を読んでから書く。
+Target project: $ARGUMENTS (if omitted, the most recent one, or ask).
+Read its `context.md` before you write.
 
-## 出力先
+**Write the prompt in the user's language.** The quoted lines below fix the wording, not the language.
 
-`deep-research-prompt.md`。**送信後は改変しないこと**（再現性の記録）。
+## Where it goes
 
-## プロンプトに必ず入れるもの
+`deep-research-prompt.md`. **Never edit it after sending** — it is the reproducibility record.
 
-| 要求 | なぜ |
+## What the prompt must contain
+
+| Requirement | Why |
 |---|---|
-| **原論文・一次情報へ直接リンクさせる**（サーベイ経由にしない） | 後段の照合が成立する前提 |
-| inline citations とソースのメタデータ | 同上 |
-| 確認できない書誌情報は「未確認」と明示させる | 幻覚引用は実在する。年や会議名を推測させない |
-| **著者自身が書いた限界を原文引用で** | **空白の材料。判断ではなく事実の抽出**（原則 1） |
-| **実数**（データ規模・精度・計算量） | 「高精度」では照合できない（原則 8） |
-| 期間・分野・条件で境界を切る | 網羅性は期待できない |
-| **失敗・限界の報告も同じ重みで** | 負の結果は公表されにくい。明示的に要求する |
+| **Link straight to the original papers and primary sources** (not by way of surveys) | The precondition for the later cross-check to work at all |
+| Inline citations and source metadata | Same |
+| Have it mark any bibliographic detail it cannot confirm as "unconfirmed" | Hallucinated citations are real. Never let it guess a year or a venue |
+| **The limitations the authors wrote themselves, quoted verbatim** | **Raw material for the gap. Extracting fact, not passing judgment** (Principle 1) |
+| **Actual numbers** (data scale, accuracy, compute) | "High accuracy" cannot be cross-checked (Principle 8) |
+| Draw boundaries by period, field, and condition | Coverage is not something to expect |
+| **Reports of failure and limitation, weighted the same** | Negative results rarely get published. Demand them explicitly |
 
-## 絶対に入れてはいけないもの
+## What must never go in
 
-- **分野名・手法名のリスト。** `context.md` に暫定リストがあっても**渡さない**。
-  渡すと回答者が「フォーム記入係」になり、こちらが思いつかなかった呼び名を潰す（seed leakage）
-- **「新規性はどこか」という問い**（原則 1）
-- **こちらの見立て・結論。** 統合の材料が汚染される
+- **A list of field names or method names.** Even if `context.md` has a provisional list,
+  **never hand it over**. It turns the responder into a form-filler and kills off the names you
+  never thought of (seed leakage)
+- **The question "where is the novelty?"** (Principle 1)
+- **Your own read of the situation, or your conclusions.** It contaminates the material the
+  synthesis gets built from
 
-## 代わりに入れる: 用語列挙を「手順」として課す
+## Instead: make enumerating the terms a required step
 
-分野名を与える代わりに、**列挙作業そのものをタスクにする**。
+Rather than handing over field names, **make the enumeration itself part of the task**.
 
-> 調査を始める前に、この問題または構造的に同じ問題を指しうる専門用語を
-> できるだけ多く列挙してください。複数分野の語彙を横断して、英語・日本語の両方で。
-> **列挙した用語をレポート冒頭に明示したうえで**、それぞれで検索を実行してください。
+> Before you start searching, enumerate as many technical terms as you can that could refer to
+> this problem, or to a structurally identical one. Cross the vocabularies of several fields, and
+> include **at least one language other than English** that is likely to have its own literature
+> on this topic.
+> **State the enumerated terms at the top of the report**, then run a search for each one.
 
-冒頭の用語リストは、後で「何が探されなかったか」を測る材料になる。
+That list at the top later becomes the material for measuring **what never got searched**.
 
-## 迎合を防ぐ 1 行
+> 🌏 **Why insist on a non-English language.** On the first real run, the era that both sweeps
+> reported as thinnest in English turned out to be the *thickest* in Japanese — a lineage of eight
+> papers from 1991–2000, all freely available, that neither sweep had found. Pick whichever
+> language the field is actually written in: Japanese and Chinese for manufacturing and CAD,
+> German for mechanical engineering and standards, and so on.
 
-必ず入れる。
+## The one line that prevents sycophancy
 
-> 私が提示した問題設定に迎合しないでください。
-> **この問題設定自体が既に解決済みなら、そう書いてください。**
+Always include it.
 
-## 出力形式の指定
+> Do not accommodate the problem statement I have given you.
+> **If this problem statement is itself already solved, say so.**
 
-- 研究の一覧は**表形式**。列は 入力形式 / 対応の粒度 / 扱える範囲 / 評価方法と実数 / 出典
-- 各主張の直後に**インライン引用**
-- レポート冒頭に**探索に使った用語の一覧**
+## Output format to specify
 
-## ファイルに残す記録欄
+- The list of research goes in a **table**. Columns: input format / granularity of correspondence /
+  scope it handles / evaluation method and actual numbers / source
+- An **inline citation** immediately after every claim
+- **The list of terms used to search**, at the top of the report
 
-プロンプト本文のほかに、次を書ける欄を作っておく。
+## Record fields to leave in the file
 
-- プロンプトを改変せず送信したか
-- **Deep Research からの事前質問と、それへの回答**
-- **提示された調査計画**（原文）
-- 実行中にソース範囲を調整したか
-- 実行日時
+Alongside the prompt body, create fields to record the following.
 
-### ⚠️ 実運用の注意（実測）
+- Whether the prompt was sent unmodified
+- **Deep Research's clarifying questions, and the answers given**
+- **The research plan it proposed** (verbatim)
+- Whether the source scope was adjusted mid-run
+- Date and time of the run
 
-**Deep Research は明確化の質問を出さないことがある。** 計画だけが提示され、
-放置すると自動で開始する。**計画の提示が唯一の介入点。**
-質問が来る前提でプロンプトを書かないこと。
+### ⚠️ Operational note (measured)
 
-## 人間に渡す指示
+**Deep Research does not always ask clarifying questions.** Sometimes only a plan appears, and if
+you leave it alone it starts on its own. **The plan is the only point of intervention.**
+Never write the prompt assuming the questions will come.
 
-1. プロンプト本文（コードブロック内）を**そのまま**貼る
-2. **調査計画が出たら読む。** 範囲がずれていたらここで直す
-3. 完了後は **Markdown でダウンロード**して `deep-research-output.md` に**無編集で**保存
-   （コピペしない。多くのサービスが Markdown 書き出しに対応している）
+## Instructions to hand to the human
 
-## 終わったら
+1. Paste the prompt body (inside the code block) **verbatim**
+2. **Read the research plan when it appears.** If the scope is off, fix it here
+3. When it finishes, **download as Markdown** and save it to `deep-research-output.md` **unedited**
+   (do not copy-paste — most services support Markdown export)
 
-**Stage 2 は Deep Research の完了を待たずに並行して開始できる。**
-次は `/tatara:sweep`。
+## When you're done
+
+**Stage 2 can start in parallel, without waiting for Deep Research to finish.**
+Next is `/tatara:sweep`.

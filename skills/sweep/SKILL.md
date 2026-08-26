@@ -1,83 +1,92 @@
 ---
-description: Stage 2。外部 Deep Research とは独立に、こちら側で調査する。発見メカニズムを変えた複数エージェントを並列で走らせる。
-argument-hint: [プロジェクトディレクトリ]
+description: Stage 2. Investigate on this side, independently of the external Deep Research. Run parallel agents that each change the discovery mechanism.
+argument-hint: [project directory]
 disable-model-invocation: true
 ---
 
-# sweep — こちら側の独立調査
+# sweep — the independent investigation on this side
 
-> ⛏️ **砂鉄を採りにいく（こちらの経路）。** 別の場所を、別の掘り方で。比重の違うものが採れる。
+> ⛏️ **Go collect the satetsu (砂鉄) — our own route.** A different place, dug a different way. What settles out has a different specific gravity.
 
-まず `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` を読むこと。
+Read `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` first.
 
-対象: $ARGUMENTS（省略時は尋ねる）。その `context.md` を読む。
+Target: $ARGUMENTS (if omitted, ask). Read its `context.md`.
 
-## 【最重要】独立性を壊さないこと
+**Have every agent write its artifacts in the user's language.**
 
-**この工程を始める前に、あなた自身が `deep-research-output.md` を読んではいけない。**
-読んでからブリーフを書くと、独立性が失われ、後段の突き合わせが無意味になる。
+## [Most important] Never break the independence
 
-各エージェントにも**明示的に禁止**する。
+**Never read `deep-research-output.md` yourself before starting this stage.**
+Write the briefs after reading it and the independence is gone, which makes the later cross-check
+meaningless.
 
-> ⚠️ `deep-research-output.md` と `deep-research-prompt.md` は絶対に読まないでください。
-> あなたはそれと独立に調査する役割です。
+**Forbid it explicitly** for each agent as well.
 
-## 分業の根拠はモデルの賢さではなく、アクセスできる範囲
+> ⚠️ Never read `deep-research-output.md` or `deep-research-prompt.md`.
+> Your role is to investigate independently of them.
 
-| | 外部 Deep Research | こちら |
+## The split is about reach, not about which model is smarter
+
+| | External Deep Research | This side |
 |---|---|---|
-| Web の広い掃引 | ◎ | ○ |
-| **ローカルファイル**（過去プロジェクト、社内メモ） | ✕ | ◎ |
-| **リポジトリを取得して中身を読む** | ✕ | ◎ |
-| **コードを動かして数値を確かめる** | ✕ | ◎ |
-| 実行中の軌道修正 | ◎ | ✕ |
+| Broad web sweep | ◎ | ○ |
+| **Local files** (past projects, internal memos) | ✕ | ◎ |
+| **Fetching a repository and reading what's inside** | ✕ | ◎ |
+| **Running code to check a number** | ✕ | ◎ |
+| Course correction mid-run | ◎ | ✕ |
 
-## 立てるエージェント（テーマに応じて増減する）
+## The agents to stand up (add or drop them to fit the topic)
 
-**同じ Web 検索を繰り返さない。発見メカニズムを変える**（原則 7）。
+**Never repeat the same web search. Change the discovery mechanism** (Principle 7).
 
-### a. 経路を変えた文献発掘
-キーワード検索は外部 DR がやっている。**別の到達経路**を使う。
+### a. Literature discovery along a different route
+Keyword search is what the external DR is doing. Use **a different way of arriving**.
 
-- **引用グラフ traversal** — 種論文を 2〜4 本決め、前向き・後ろ向きに **2〜3 ホップ**辿る
-  （OpenAlex は無認証で使える。Semantic Scholar は 429 が出やすい）
-- **コードから入る** — GitHub / Papers with Code / Hugging Face。
-  **論文になっていない実装**が出てくる。商用製品も
-- **データセットから逆引き** — そのデータを使っている論文を探す
+- **Citation graph traversal** — pick 2–4 seed papers and walk **2–3 hops** forward and backward
+  (OpenAlex works without authentication. Semantic Scholar throws 429 easily)
+- **Enter through the code** — GitHub / Papers with Code / Hugging Face.
+  **Implementations that never became papers** surface here. Commercial products too
+- **Work backward from the dataset** — find the papers that use that data
 
-**どの経路で到達したかを記録させる。** 後で経路の有効性を評価する。
+**Have them record which route got them there.** You evaluate how well each route worked later.
 
-### b. ローカル文脈の掘り起こし
-リポジトリ内の関連プロジェクト、過去の調査、既知の制約、**失敗の記録**。
-**外部調査では原理的に到達できない情報。**
+### b. Mining the local context
+Related projects in the repository, past investigations, known constraints, **records of failure**.
+**Information external research cannot reach in principle.**
 
-### c. データとベンチマークの実地確認
-「論文にそう書いてある」と「本当に入手できる」を区別する。
-**実際にアクセスさせる。** 規模は実数で。入手不可なら理由（404 / 403 / 要申請）を記録。
+### c. Checking data and benchmarks on the ground
+Separate "the paper says so" from "you can actually get it."
+**Make them actually access it.** Scale in actual numbers. If it cannot be obtained, record the
+reason (404 / 403 / application required).
 
-### d. 順方向・隣接領域
-問題の逆向き、あるいは構造的に同じ問題を解いている領域。
-**順方向で「難しい」とされているものは、逆方向でも難所になる。**
+### d. The forward direction and adjacent fields
+The reverse of the problem, or fields solving a structurally identical one.
+**Whatever is called "hard" in the forward direction is a hard part in reverse too.**
 
-## 各エージェントに必ず課すこと
+## What every agent is required to do
 
-- **一次情報にあたる。** 二次まとめの主張を事実として扱わない
-- **PDF を直接 Read しない。** HTML 版を使う。やむを得ない場合はサイズを確認してから
-- 確認できない書誌情報は「未確認」と明記。**存在を確認できない論文は書かない**
-- **「新規性があるか」を判断しない**（原則 1）
-- 検索した語と DB を**実文字列で記録**する（原則 2）
-- **Write で骨子 → Edit で節ごとに追記、1 回 100〜200 行以内**（接続断対策）
-- 機密情報は 🔒 を付けて**独立した節に分離**する。公開情報と混ぜない
+- **Go to the primary source.** Never treat a claim from a secondary summary as fact
+- **Never Read a PDF directly.** Use the HTML version. If there is no other option, check the size
+  first
+- Mark any bibliographic detail you cannot confirm as "unconfirmed." **Never write down a paper
+  whose existence you could not confirm**
+- **Never judge "whether this is novel"** (Principle 1)
+- Record the terms searched and the databases used **as literal strings** (Principle 2)
+- **Write a skeleton, then Edit section by section, 100–200 lines per call** (against dropped
+  connections)
+- Tag confidential material with 🔒 and **isolate it in its own section**. Never mix it in with
+  public information
 
-## 各研究について記録させる項目
+## What to record about each piece of research
 
-入力形式 / **対応の粒度**（何と何を対応づけるか）/ 扱える範囲 / 手法の枠組み /
-**評価と実数** / 出典 / **著者自身が書いた限界（原文引用）**
+Input format / **granularity of correspondence** (what gets matched to what) / scope it handles /
+methodological framework / **evaluation and actual numbers** / source /
+**the limitations the authors wrote themselves (quoted verbatim)**
 
-## 出力先
+## Where it goes
 
-`cc-research/` 配下に**エージェントごとに別ファイル**。競合を避ける。
+**A separate file per agent** under `cc-research/`. This avoids conflicts.
 
-## 終わったら
+## When you're done
 
-外部 Deep Research の結果が揃っていれば `/tatara:synthesize`。
+If the external Deep Research results are in, next is `/tatara:synthesize`.

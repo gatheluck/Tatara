@@ -1,62 +1,62 @@
-# context — {テーマ名}
+# context — {topic}
 
-## 研究トピック
+## Research topic
 
-{何と何を、どうしたいのか。1〜2 文で}
+{What and what, and what you want to do with them. One or two sentences}
 
-## 問題設定
+## Problem setting
 
-{具体的に。入力は何で、出力は何か}
+{Concretely. What is the input, and what is the output}
 
-## 狙い
+## Aim
 
-{これができると何が可能になるか}
+{What becomes possible once this works}
 
-## なぜ難しそうか（作業仮説・要検証）
+## Why it looks hard (working hypothesis — to be verified)
 
-> ⚠️ **以下は着手時点の見立て。調査で確認・反証する対象であって、事実ではない。**
-
-- {…}
-
-## 分野をまたぐ呼び名（空白探索の起点・要拡張）
-
-> ⚠️ **このリストを外部 Deep Research のプロンプトに入れてはいけない**（seed leakage）。
-> 使うのは Stage 4 の空白潰しのとき。
+> ⚠️ **The following is the view as of the start. It is what the research checks or refutes, not fact.**
 
 - {…}
 
-## 隣接する自分のプロジェクト
+## Names it goes by in other fields (starting points for the gap hunt — to be extended)
 
-{リポジトリ内の関連プロジェクト。Stage 2b で掘る。外部調査には見えない情報}
-
-- {パス} — {関係}
-
-## 焦点
-
-**{学術的新規性 / 実装可能性 / その他}に重きを置く。** 出したいのは:
-
-1. **「既存の手法だとここまでできる」** — 現在地。実数つき
-2. **「ここはまだ誰もやっていない」** — 空白。探索範囲つき
-
-{対象外にするものがあれば明記}
-
-## 未決
-
-{埋まっていない前提。推測で埋めないこと}
+> ⚠️ **Never put this list into the external Deep Research prompt** (seed leakage).
+> It gets used at Stage 4, when breaking the gaps.
 
 - {…}
 
-## 進め方
+## Adjacent projects of my own
 
-`tatara` プラグインの Stage 0〜4 に従う。
+{Related projects inside this repository. Mined at Stage 2b. Information the external sweep cannot see}
+
+- {path} — {relationship}
+
+## Focus
+
+**Weight it toward {academic novelty / feasibility of implementation / other}.** What should come out:
+
+1. **"Here is what existing methods can do"** — the state of the art, with actual numbers
+2. **"Here is what nobody has done"** — the gap, with its search scope
+
+{State anything that is explicitly out of scope}
+
+## Open
+
+{Premises that aren't filled in yet. Never fill them in by guessing}
+
+- {…}
+
+## How this proceeds
+
+Follow Stage 0–4 of the `tatara` plugin.
 
 ```
 0. /tatara:dr-prompt   → deep-research-prompt.md
-   ✋ 外部 DR に貼る → Markdown DL → deep-research-output.md
+   ✋ paste into external DR → download Markdown → deep-research-output.md
 2. /tatara:sweep       → cc-research/
 3. /tatara:synthesize  → synthesis.md
 4. /tatara:verify      → verify/
-   ✋ 人間が判断
+   ✋ the human decides
 ```
 
-技術的な争点が出たら `/tatara:spike`。
+If a technical dispute comes up, `/tatara:spike`.
