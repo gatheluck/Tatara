@@ -32,6 +32,17 @@ the gap doesn't count.
 Write it as: **"Not found across A, B, and C as of YYYY-MM-DD. The closest is X."**
 Never "nobody has done this."
 
+### Separate a gap in the literature from a hole in your own search
+
+**Both produce the same silence. Only one of them is a research opportunity.**
+
+- **Gap** — you looked where the work would be, and it wasn't there
+- **Hole** — you never looked there
+
+Keep them in different sections. A hole is a cost estimate ("closing it would take one pass through
+the patent databases"); a gap is a claim. Filing a hole as a gap is how you end up proposing work
+that already exists.
+
 ## 3. Never build a structural claim out of abstracts
 
 **This is the most expensive mistake available.**

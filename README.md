@@ -118,7 +118,7 @@ support **moves from your own judgment to someone else's words**.
 ## 📦 Install
 
 Anything under `~/.claude/skills/` loads automatically from the next session.
-After it starts, open `/help` → **Custom commands**. Six entries under `tatara:` means you're set 🎉
+After it starts, open `/help` → **Custom commands**. Seven entries under `tatara:` means you're set 🎉
 
 ### 🏠 Just use it
 
@@ -134,7 +134,7 @@ If you also want to edit the plugin, **symlink your working copy instead of clon
 ln -s /path/to/your/tatara ~/.claude/skills/tatara
 ```
 
-**Verified working**: the loader follows the symlink, and all six skills appear. One checkout, one
+**Verified working**: the loader follows the symlink, and all seven skills appear. One checkout, one
 place to `git pull`, edits live immediately. Run `/reload-plugins` to pick them up without
 restarting.
 
@@ -212,6 +212,16 @@ Cross-checks both sides into `synthesis.md` — the state-of-the-art table and t
 
 **Goes after the gap.** Patents, non-English literature, primary sources nobody actually read —
 whatever it takes to find out if "nobody has done this" holds up.
+
+### 6️⃣ Hand it to someone else
+
+```
+/tatara:report
+```
+
+`synthesis.md` is correct and dense. This renders it as a single HTML file a colleague can open and
+understand without asking you questions — provenance, search scope, gap status, and the corrections
+record all preserved. **Derived from the markdown, never authored separately.**
 
 ### 🔨 Any time: settle it by running it
 
@@ -295,6 +305,7 @@ tamahagane/YYYY-MM-DD-{slug}/
 ├── synthesis.md                ⭐ the deliverable: state of the art + gaps + open + corrections
 ├── verify/                     Stage 4. Gap attacks, primary-source retrieval, spikes
 │   └── spike_*.py                every version of a spike script is kept
+├── report.html                 Stage 5. The shareable rendering of synthesis.md
 ├── plan.md                     research plan, once the topic settles
 └── worklog.md                  what happened at each stage, and why
 ```
@@ -342,6 +353,7 @@ Stage 2's local mining **picks up things that cannot leave the building.**
 | ⛏️ `sweep` | 2 | Investigate independently on this side (parallel agents) | none |
 | 🔥 `synthesize` | 3 | Cross-check → state-of-the-art table + coverage matrix | none |
 | 🔨 `verify` | 4 | **Go break the gap.** Retrieve unread primary sources | none |
+| 🗡️ `report` | 5 | Render `synthesis.md` as a single self-contained HTML page for sharing | none |
 | ⚡ `spike` | any | Settle a technical dispute **by executing** | approve installs |
 
 ### ❓ Why separate stages?
