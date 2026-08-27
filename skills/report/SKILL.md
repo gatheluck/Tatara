@@ -42,7 +42,7 @@ inverts the meaning.
 |---|---|
 | **The provenance column** (synthetic / real / unknown) | A number without it reads as established fact |
 | **Search scope on every gap** | Without it, "nobody has done this" is unfalsifiable |
-| **Gap status** (✅ ⚠️ ❌) | A broken gap that looks intact is the worst possible outcome |
+| **Gap status** (✅ ⚠️ ❌) | A refuted gap that looks intact is the worst possible outcome |
 | **The corrections record** | It tells the reader how much to trust the rest |
 | **The revision log** | Shows which claims have been attacked and which are new |
 | **🔒 marks** | Keep them visible. The reader may forward this further |
@@ -82,8 +82,8 @@ in grayscale, in forced-colors mode, and for a colorblind reader.
 | synthetic | ⚗️ outlined, "synthetic" |
 | unknown | ⚠️ hatched, "unknown" |
 | ✅ gap survived | green chip |
-| ⚠️ partly broken | amber chip |
-| ❌ broken | red chip, **body text struck through in the heading only, never in the explanation** |
+| ⚠️ partly refuted | amber chip |
+| ❌ refuted | red chip, **struck through in the heading only, never in the explanation** |
 
 Reserve those four status colors for status. **Never reuse them to distinguish one method from
 another.**
@@ -127,7 +127,7 @@ Check that the badges still read.
 - **Do not add figures that restate a sentence.** If the sentence was clear, the figure is noise
 - **Do not reorder sections to build a narrative.** Source order, so the two documents stay
   comparable
-- **Do not soften ❌.** A broken gap stays visibly broken
+- **Do not soften ❌.** A refuted gap stays visibly refuted
 
 ## When you're done
 

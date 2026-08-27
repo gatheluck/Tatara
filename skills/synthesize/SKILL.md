@@ -82,4 +82,4 @@ Structure:
 
 ## When you're done
 
-`/tatara:verify`. **Go break the gaps.**
+`/tatara:verify`. **Hunt for counterexamples.**

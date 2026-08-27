@@ -70,8 +70,8 @@ Mark each one with its current status:
 | Mark | Meaning |
 |---|---|
 | ✅ | survived every attack so far |
-| ⚠️ | partly broken — narrower than it was |
-| ❌ | **broken.** Kept on the page, because how it broke is evidence |
+| ⚠️ | partly refuted — survives, but narrower than it was |
+| ❌ | **refuted** — prior work was found. Kept on the page, because how it fell is evidence |
 
 ## 2.1 {name of the gap} — {✅ / ⚠️ / ❌}
 

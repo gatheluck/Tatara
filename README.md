@@ -110,7 +110,7 @@ Not "nobody has done this," but
 **"Not found across A, B, and C as of YYYY-MM-DD. The closest is X."**
 
 **It goes after its own gap claims.**
-Stage 4's job is to destroy your claim. Each time one breaks, the claim gets more specific and its
+Stage 4's job is to refute your own claim. Each refutation makes it more specific and its
 support **moves from your own judgment to someone else's words**.
 
 ---
@@ -352,7 +352,7 @@ Stage 2's local mining **picks up things that cannot leave the building.**
 | 📝 `dr-prompt` | 0 | Generate the prompt for external Deep Research | **paste and save** |
 | ⛏️ `sweep` | 2 | Investigate independently on this side (parallel agents) | none |
 | 🔥 `synthesize` | 3 | Cross-check → state-of-the-art table + coverage matrix | none |
-| 🔨 `verify` | 4 | **Go break the gap.** Retrieve unread primary sources | none |
+| 🔨 `verify` | 4 | **Hunt for counterexamples.** Retrieve unread primary sources | none |
 | 🗡️ `report` | 5 | Render `synthesis.md` as a single self-contained HTML page for sharing | none |
 | ⚡ `spike` | any | Settle a technical dispute **by executing** | approve installs |
 
@@ -394,7 +394,7 @@ only closes when a machine is made to do the cross-checking.
 | 8 | **Every number carries its provenance** — synthetic or real |
 | 9 | **Never select on excitement** — select on `cost-to-test` |
 | 10 | **Assume ~10% yield when deciding how many candidates to raise** |
-| 11 | **A gap claim breaking is a success** |
+| 11 | **A refuted gap claim is progress** |
 
 Each one is backed in [`reference/evidence.md`](reference/evidence.md), with **citations (arXiv IDs)
 and measured numbers**. The grounds are written out so that you can decide a principle is obsolete
