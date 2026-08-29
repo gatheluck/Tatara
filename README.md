@@ -81,10 +81,20 @@ with Abumi.**
 
 There are only two outputs.
 
-| Output | What it is |
-|---|---|
-| 📊 **"Here is what existing methods can do"** | The state of the art, with actual numbers |
-| 🕳️ **"Here is what nobody has done"** | The gap, with the search scope that backs it |
+Two kinds of question come through it, and they take different paths.
+
+| Track | The question | What comes out |
+|---|---|---|
+| 🕳️ **novelty** | Is there something here nobody has done? | The state of the art with real numbers, and the gap **with the search scope that backs it** |
+| 🎯 **selection** | Which of the existing options fits us best? | A decision table with provenance, and **the conditions that would reverse the choice** |
+
+`init` settles which one, and the pipeline diverges from Stage 3 onward. The two share everything
+before that: both need coverage, both need provenance, both need the local context that external
+research cannot reach.
+
+**A selection task carries no gap section** — it never claims novelty, so there is no absence to
+make falsifiable. **A novelty task cannot skip Stage 4**: in both runs so far the headline gap claim
+was refuted there. Shipping one unattacked means shipping a claim that is probably wrong.
 
 ### ✅ Good fit
 
@@ -110,7 +120,7 @@ Not "nobody has done this," but
 **"Not found across A, B, and C as of YYYY-MM-DD. The closest is X."**
 
 **It goes after its own gap claims.**
-Stage 4's job is to destroy your claim. Each time one breaks, the claim gets more specific and its
+Stage 4's job is to refute your own claim. Each refutation makes it more specific and its
 support **moves from your own judgment to someone else's words**.
 
 ---
@@ -118,7 +128,7 @@ support **moves from your own judgment to someone else's words**.
 ## 📦 Install
 
 Anything under `~/.claude/skills/` loads automatically from the next session.
-After it starts, open `/help` → **Custom commands**. Six entries under `tatara:` means you're set 🎉
+After it starts, open `/help` → **Custom commands**. Seven entries under `tatara:` means you're set 🎉
 
 ### 🏠 Just use it
 
@@ -134,7 +144,7 @@ If you also want to edit the plugin, **symlink your working copy instead of clon
 ln -s /path/to/your/tatara ~/.claude/skills/tatara
 ```
 
-**Verified working**: the loader follows the symlink, and all six skills appear. One checkout, one
+**Verified working**: the loader follows the symlink, and all seven skills appear. One checkout, one
 place to `git pull`, edits live immediately. Run `/reload-plugins` to pick them up without
 restarting.
 
@@ -212,6 +222,20 @@ Cross-checks both sides into `synthesis.md` — the state-of-the-art table and t
 
 **Goes after the gap.** Patents, non-English literature, primary sources nobody actually read —
 whatever it takes to find out if "nobody has done this" holds up.
+
+### 6️⃣ Hand it to someone else
+
+```
+/tatara:report
+```
+
+`synthesis.md` is correct and dense. This turns it into a single HTML file a colleague can open and
+understand without asking you questions.
+
+**It reorganizes.** The source is ordered by research stage; the report is ordered by the questions
+a reader actually has, with background and definitions added up front and the dense tables moved to
+the back. **Findings and numbers still come strictly from the source** — background and framing are
+written fresh, claims are not.
 
 ### 🔨 Any time: settle it by running it
 
@@ -295,6 +319,7 @@ tamahagane/YYYY-MM-DD-{slug}/
 ├── synthesis.md                ⭐ the deliverable: state of the art + gaps + open + corrections
 ├── verify/                     Stage 4. Gap attacks, primary-source retrieval, spikes
 │   └── spike_*.py                every version of a spike script is kept
+├── report.html                 Stage 5. The shareable rendering of synthesis.md
 ├── plan.md                     research plan, once the topic settles
 └── worklog.md                  what happened at each stage, and why
 ```
@@ -341,7 +366,8 @@ Stage 2's local mining **picks up things that cannot leave the building.**
 | 📝 `dr-prompt` | 0 | Generate the prompt for external Deep Research | **paste and save** |
 | ⛏️ `sweep` | 2 | Investigate independently on this side (parallel agents) | none |
 | 🔥 `synthesize` | 3 | Cross-check → state-of-the-art table + coverage matrix | none |
-| 🔨 `verify` | 4 | **Go break the gap.** Retrieve unread primary sources | none |
+| 🔨 `verify` | 4 | **Hunt for counterexamples.** Retrieve unread primary sources | none |
+| 🗡️ `report` | 5 | **Reorganize** `synthesis.md` into a single HTML page a colleague can read alone | say who reads it |
 | ⚡ `spike` | any | Settle a technical dispute **by executing** | approve installs |
 
 ### ❓ Why separate stages?
@@ -382,7 +408,7 @@ only closes when a machine is made to do the cross-checking.
 | 8 | **Every number carries its provenance** — synthetic or real |
 | 9 | **Never select on excitement** — select on `cost-to-test` |
 | 10 | **Assume ~10% yield when deciding how many candidates to raise** |
-| 11 | **A gap claim breaking is a success** |
+| 11 | **A refuted gap claim is progress** |
 
 Each one is backed in [`reference/evidence.md`](reference/evidence.md), with **citations (arXiv IDs)
 and measured numbers**. The grounds are written out so that you can decide a principle is obsolete
@@ -398,6 +424,22 @@ when the situation changes.
 - ⚡ The spike surfaced **five of my own errors** (**zero were found by discussion**)
 - 🔀 The two independent routes overlapped on **exactly one paper**. Either alone would have missed most of it
 - 📋 **Ten errors recorded**, two of them violations of Principle 3 (structure built from abstracts)
+
+---
+
+## 🧪 Tests
+
+The plugin is instructions, not code, so the suite checks structure and content invariants. It
+exists because every defect shipped so far was mechanically detectable — an unbalanced code fence,
+a stale skill count, leftovers from a rename, a link to a file that was never written.
+
+```bash
+python3 tests/test_plugin.py       # 103 checks, no dependencies
+python3 tests/mutation_check.py    # does the suite actually fail when you break something?
+```
+
+The second one matters more than the first. A green suite proves nothing until you have watched it
+go red.
 
 ---
 

@@ -32,6 +32,17 @@ the gap doesn't count.
 Write it as: **"Not found across A, B, and C as of YYYY-MM-DD. The closest is X."**
 Never "nobody has done this."
 
+### Separate a gap in the literature from a hole in your own search
+
+**Both produce the same silence. Only one of them is a research opportunity.**
+
+- **Gap** — you looked where the work would be, and it wasn't there
+- **Hole** — you never looked there
+
+Keep them in different sections. A hole is a cost estimate ("closing it would take one pass through
+the patent databases"); a gap is a claim. Filing a hole as a gap is how you end up proposing work
+that already exists.
+
 ## 3. Never build a structural claim out of abstracts
 
 **This is the most expensive mistake available.**
@@ -92,9 +103,9 @@ Measured: ~10% of ideas are promising, ~7% are implemented correctly on the firs
 
 **If you only raise three candidates, zero or one will survive.**
 
-## 11. A gap claim breaking is a success
+## 11. A refuted gap claim is progress
 
-Gap claims are supposed to get rewritten. **Each break makes the claim more specific and moves its
+Gap claims are supposed to get rewritten. **Each refutation makes the claim more specific and moves its
 support from your own judgment to someone else's words.**
 
 A gap that survived several attacks is stronger than one that was never attacked.
@@ -137,3 +148,19 @@ Talk to Claude in Japanese and `synthesis.md` comes out in Japanese.
 Japanese terms that name the tool's own metaphor are kept in romanization with the kanji on first
 use — *tatara* (鑪), *tamahagane* (玉鋼), *kera* (鉧), *kanna-nagashi* (鉄穴流し), *murage* (村下).
 Translating them would erase where the metaphor comes from.
+
+### Do not translate the status vocabulary literally
+
+The words below are terms of art. A literal rendering reads as clumsy, and worse, it obscures what
+actually happened — the reader cannot tell whether a claim was *disproved* or merely *damaged*.
+
+| English | 日本語 | Not |
+|---|---|---|
+| refuted (a gap claim) | **反証された** / 先行研究が見つかった | ~~壊れた~~ |
+| partly refuted | **一部反証**（範囲を狭めて維持） | ~~半分壊れた~~ |
+| survived | **反証されず** / 維持 | — |
+| hunt for a counterexample | **反例を探す** | ~~壊しにいく~~ |
+| a refutation is progress | **反証は失敗ではない。前進である** | ~~壊れるのは成功~~ |
+
+The physical metaphor — breaking the kera (鉧) apart to sort it — belongs to the **stage
+description**, not to the **status of a claim**. Keep the two apart.

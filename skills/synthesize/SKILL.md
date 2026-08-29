@@ -24,6 +24,21 @@ External Deep Research output can run to tens of thousands of characters.
 Each agent reads **both** the DR output and this side's sweep, and cross-checks them along its
 own dimension.
 
+## Which deliverable — read `Track:` in `context.md`
+
+| Track | Template | Shape |
+|---|---|---|
+| **novelty** | `${CLAUDE_PLUGIN_ROOT}/templates/synthesis.md` | state of the art → gaps → open → corrections |
+| **selection** | `${CLAUDE_PLUGIN_ROOT}/templates/selection.md` | decision → candidates → comparison → fit → what reverses it |
+
+**The cross-check agents below run either way.** Coverage and contradiction matter for both; only
+the assembled document differs.
+
+**On a selection track, weight them differently.** Whether the code exists, what licence it carries,
+and what input format it consumes decide more than the citation graph does. A method nobody can run
+is not a candidate whatever it scores. S1 becomes a candidate table rather than a coverage matrix,
+and S4 asks whether the *candidate list* is complete rather than whether an absence claim holds.
+
 ## Agents to launch (split by dimension)
 
 ### S1. Method inventory and coverage matrix
@@ -82,4 +97,4 @@ Structure:
 
 ## When you're done
 
-`/tatara:verify`. **Go break the gaps.**
+`/tatara:verify`. **Hunt for counterexamples.**

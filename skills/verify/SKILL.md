@@ -1,13 +1,13 @@
 ---
-description: Stage 4. Go break the gaps and retrieve the primary sources nobody read. A gap that breaks is a success. Only what survives becomes a claim.
+description: Stage 4. Hunt for counterexamples to your own gap claims and retrieve the primary sources nobody read. A refuted gap is progress. Only what survives becomes a claim.
 argument-hint: [project directory]
 disable-model-invocation: true
 ---
 
-# verify — go break the gap
+# verify — hunt for counterexamples
 
 > 🔨 **Break the kera (鉧).** Hammer it apart and sort it into tamahagane (玉鋼) and slag.
-> **Breaking is the process, not a failure.**
+> **Sorting is the process. A gap that turns out to be occupied is not a failure.**
 
 Read `${CLAUDE_PLUGIN_ROOT}/reference/principles.md` first.
 
@@ -15,18 +15,39 @@ Target: $ARGUMENTS (ask if omitted). Read `synthesis.md` and `synthesis/S4-*.md`
 
 **Write in the user's language.** Instruct every agent to do the same.
 
-## What this stage is for
+## What this stage is for — it depends on the track
 
-**Find out whether the gap is real. If it breaks, that's a success.**
+Read `Track:` in `context.md`. **The purpose is the same either way: attack your own conclusion.**
+What you attack differs.
 
-Every break makes the claim more specific and moves its support from your own judgment to
+| Track | The conclusion | How to attack it |
+|---|---|---|
+| **novelty** | "nobody has done this" | **hunt for prior work.** Finding some refutes the claim |
+| **selection** | "X is the right choice" | **hunt for the reason X fails.** Does the code build? Does it take the format we hold? Is the licence usable? Does the reported number come from data anything like ours? |
+
+> Both runs of the novelty track so far had their headline gap refuted here. **Skipping this stage
+> ships a claim that is probably wrong.**
+>
+> The selection track has the same exposure in a different place: an earlier survey done without
+> this stage produced a comparison table with no numbers, no provenance, and no check that any of
+> the methods would run. It mapped the field and could not choose.
+
+Everything below is written for the novelty track. **On a selection track, substitute the target**:
+where it says "the gap," read "the front-runner"; where it says "prior work that fills it," read
+"the blocker that rules it out."
+
+## What this stage is for (novelty)
+
+**Find out whether the gap is real. Refuting it is progress, not a setback.**
+
+Every refutation makes the claim more specific and moves its support from your own judgment to
 **someone else's words**.
 A gap that broke a few times and survived is **stronger than one that was never attacked**
 (Principle 11).
 
 ## What to launch
 
-### 1. Break the gap (the main assault)
+### 1. Hunt for a counterexample (the main assault)
 
 **Make finding something the goal.** Not "confirm that it isn't there."
 

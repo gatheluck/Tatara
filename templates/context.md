@@ -21,7 +21,7 @@
 ## Names it goes by in other fields (starting points for the gap hunt — to be extended)
 
 > ⚠️ **Never put this list into the external Deep Research prompt** (seed leakage).
-> It gets used at Stage 4, when breaking the gaps.
+> It gets used at Stage 4, when hunting for counterexamples to the gaps.
 
 - {…}
 
