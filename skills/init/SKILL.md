@@ -76,7 +76,26 @@ instead of putting topics at the root. Match whatever is already there.
 Stage 2's local mining goes through them. External research cannot do this in principle, and it
 gets more valuable as you accumulate.
 
-### 4. Write `context.md`
+### 4. Establish which track this is
+
+**Two kinds of question come through this tool, and they need different pipelines.**
+
+| Track | The question | Deliverable |
+|---|---|---|
+| **novelty** | Is there something here nobody has done? | state of the art + gaps |
+| **selection** | Which of the existing options fits us best? | a decision table + the conditions that reverse it |
+
+Usually the user's description settles it. If it does not, **ask** — the two produce different
+documents and diverge from Stage 3 onward.
+
+**Record the answer in `context.md` under a `Track:` line.** Later stages read it.
+
+> A selection task never claims novelty, so it carries no gap section and no search-scope
+> discipline for absence. A novelty task **cannot** skip those: in both runs so far, the headline
+> gap claim was refuted at Stage 4. Shipping one unattacked means shipping a claim that is
+> probably wrong.
+
+### 5. Write `context.md`
 
 Use `${CLAUDE_PLUGIN_ROOT}/templates/context.md` as the template.
 
@@ -94,16 +113,16 @@ These in particular are mandatory.
 - **The focus** — what you want out of this. The default is two things: where the field stands,
   and where the gap is
 
-### 5. Look for neighboring projects
+### 6. Look for neighboring projects
 
 If anything in the repository looks related, list it in `context.md`.
 **Stage 2 digs here. There is information external research cannot reach in principle.**
 
-### 6. Create `worklog.md`
+### 7. Create `worklog.md`
 
 Empty is fine. Each stage appends its record.
 
-### 7. Check for missing premises
+### 8. Check for missing premises
 
 **Deep Research has a hard cap on how many times you can run it. The prompt has to land on the
 first try.**

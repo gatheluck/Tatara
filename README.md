@@ -81,10 +81,20 @@ with Abumi.**
 
 There are only two outputs.
 
-| Output | What it is |
-|---|---|
-| 📊 **"Here is what existing methods can do"** | The state of the art, with actual numbers |
-| 🕳️ **"Here is what nobody has done"** | The gap, with the search scope that backs it |
+Two kinds of question come through it, and they take different paths.
+
+| Track | The question | What comes out |
+|---|---|---|
+| 🕳️ **novelty** | Is there something here nobody has done? | The state of the art with real numbers, and the gap **with the search scope that backs it** |
+| 🎯 **selection** | Which of the existing options fits us best? | A decision table with provenance, and **the conditions that would reverse the choice** |
+
+`init` settles which one, and the pipeline diverges from Stage 3 onward. The two share everything
+before that: both need coverage, both need provenance, both need the local context that external
+research cannot reach.
+
+**A selection task carries no gap section** — it never claims novelty, so there is no absence to
+make falsifiable. **A novelty task cannot skip Stage 4**: in both runs so far the headline gap claim
+was refuted there. Shipping one unattacked means shipping a claim that is probably wrong.
 
 ### ✅ Good fit
 
@@ -414,6 +424,22 @@ when the situation changes.
 - ⚡ The spike surfaced **five of my own errors** (**zero were found by discussion**)
 - 🔀 The two independent routes overlapped on **exactly one paper**. Either alone would have missed most of it
 - 📋 **Ten errors recorded**, two of them violations of Principle 3 (structure built from abstracts)
+
+---
+
+## 🧪 Tests
+
+The plugin is instructions, not code, so the suite checks structure and content invariants. It
+exists because every defect shipped so far was mechanically detectable — an unbalanced code fence,
+a stale skill count, leftovers from a rename, a link to a file that was never written.
+
+```bash
+python3 tests/test_plugin.py       # 103 checks, no dependencies
+python3 tests/mutation_check.py    # does the suite actually fail when you break something?
+```
+
+The second one matters more than the first. A green suite proves nothing until you have watched it
+go red.
 
 ---
 

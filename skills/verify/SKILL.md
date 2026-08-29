@@ -15,7 +15,28 @@ Target: $ARGUMENTS (ask if omitted). Read `synthesis.md` and `synthesis/S4-*.md`
 
 **Write in the user's language.** Instruct every agent to do the same.
 
-## What this stage is for
+## What this stage is for — it depends on the track
+
+Read `Track:` in `context.md`. **The purpose is the same either way: attack your own conclusion.**
+What you attack differs.
+
+| Track | The conclusion | How to attack it |
+|---|---|---|
+| **novelty** | "nobody has done this" | **hunt for prior work.** Finding some refutes the claim |
+| **selection** | "X is the right choice" | **hunt for the reason X fails.** Does the code build? Does it take the format we hold? Is the licence usable? Does the reported number come from data anything like ours? |
+
+> Both runs of the novelty track so far had their headline gap refuted here. **Skipping this stage
+> ships a claim that is probably wrong.**
+>
+> The selection track has the same exposure in a different place: an earlier survey done without
+> this stage produced a comparison table with no numbers, no provenance, and no check that any of
+> the methods would run. It mapped the field and could not choose.
+
+Everything below is written for the novelty track. **On a selection track, substitute the target**:
+where it says "the gap," read "the front-runner"; where it says "prior work that fills it," read
+"the blocker that rules it out."
+
+## What this stage is for (novelty)
 
 **Find out whether the gap is real. Refuting it is progress, not a setback.**
 
