@@ -219,9 +219,13 @@ whatever it takes to find out if "nobody has done this" holds up.
 /tatara:report
 ```
 
-`synthesis.md` is correct and dense. This renders it as a single HTML file a colleague can open and
-understand without asking you questions — provenance, search scope, gap status, and the corrections
-record all preserved. **Derived from the markdown, never authored separately.**
+`synthesis.md` is correct and dense. This turns it into a single HTML file a colleague can open and
+understand without asking you questions.
+
+**It reorganizes.** The source is ordered by research stage; the report is ordered by the questions
+a reader actually has, with background and definitions added up front and the dense tables moved to
+the back. **Findings and numbers still come strictly from the source** — background and framing are
+written fresh, claims are not.
 
 ### 🔨 Any time: settle it by running it
 
@@ -353,7 +357,7 @@ Stage 2's local mining **picks up things that cannot leave the building.**
 | ⛏️ `sweep` | 2 | Investigate independently on this side (parallel agents) | none |
 | 🔥 `synthesize` | 3 | Cross-check → state-of-the-art table + coverage matrix | none |
 | 🔨 `verify` | 4 | **Hunt for counterexamples.** Retrieve unread primary sources | none |
-| 🗡️ `report` | 5 | Render `synthesis.md` as a single self-contained HTML page for sharing | none |
+| 🗡️ `report` | 5 | **Reorganize** `synthesis.md` into a single HTML page a colleague can read alone | say who reads it |
 | ⚡ `spike` | any | Settle a technical dispute **by executing** | approve installs |
 
 ### ❓ Why separate stages?
